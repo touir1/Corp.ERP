@@ -11,3 +11,5 @@ Ideas:
 - user management with profile view / change history etc
 - track search requests or maybe add a search session functionality to track results used and timestamp each time the same problem occurs in the logs
 - add links to documentation and jira or other ticket system ids fields.
+- admin interface
+- dashboard for stats
