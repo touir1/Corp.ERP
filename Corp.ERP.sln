@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corp.ERP.Inventory.Domain", "Inventory\Corp.ERP.Inventory.Domain\Corp.ERP.Inventory.Domain.csproj", "{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory", "Inventory", "{4DF111D4-47AF-4928-A5F5-4F503E47281B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hr", "Hr", "{46C904E8-C650-490D-B475-1587BE71DC6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Edms", "Edms", "{E6EF0915-FF87-4CC4-A015-33A9DBBA2411}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crm", "Crm", "{9E0A470A-DC25-4F3B-8C2C-2216D6854064}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finance", "Finance", "{70E112AA-77E7-4B63-8A65-4666C6157EB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corp.ERP.Inventory.Domain.UnitTests", "Inventory\Corp.ERP.Inventory.Domain.UnitTests\Corp.ERP.Inventory.Domain.UnitTests.csproj", "{E31E31D3-25C3-4D18-B018-AC8292ECDAA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E31E31D3-25C3-4D18-B018-AC8292ECDAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31E31D3-25C3-4D18-B018-AC8292ECDAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E31E31D3-25C3-4D18-B018-AC8292ECDAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E31E31D3-25C3-4D18-B018-AC8292ECDAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF4027B5-FACD-4757-A3A3-D2B2C0C0E33E} = {4DF111D4-47AF-4928-A5F5-4F503E47281B}
+		{E31E31D3-25C3-4D18-B018-AC8292ECDAA4} = {4DF111D4-47AF-4928-A5F5-4F503E47281B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8468CDDB-007A-47AD-AAEF-DCF4BF8C2EFB}
+	EndGlobalSection
+EndGlobal
