@@ -1,7 +1,3 @@
-using Corp.ERP.Inventory.Domain.Models;
-using FluentAssertions;
-using NSubstitute;
-
 namespace Corp.ERP.Inventory.Domain.UnitTests;
 
 public class UserUnitTests

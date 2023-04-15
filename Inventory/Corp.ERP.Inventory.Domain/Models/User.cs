@@ -1,6 +1,6 @@
 ﻿namespace Corp.ERP.Inventory.Domain.Models;
 
-public class User
+public class User : IEntity
 {
     public virtual int Id { get; set; }
     public virtual string FirstName { get; set; }

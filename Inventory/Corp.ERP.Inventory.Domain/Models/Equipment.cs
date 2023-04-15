@@ -1,6 +1,6 @@
 ﻿namespace Corp.ERP.Inventory.Domain.Models;
 
-internal class Equipment: InventoryItem
+public class Equipment : InventoryItem, IEntity
 {
     public virtual Storage StorageUnit { get; set; }
 }
