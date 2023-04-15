@@ -1,8 +1,8 @@
-﻿using Corp.ERP.Inventory.Application.ViewModel;
+﻿using Corp.ERP.Inventory.Application.Dto;
 
 namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 
 public class GetEquipmentsQueryResult
 {
-    IList<EquipmentVM> Result { get; set; }
+    public IList<EquipmentDto> Result { get; set; }
 }

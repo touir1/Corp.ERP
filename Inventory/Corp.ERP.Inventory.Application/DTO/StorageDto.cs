@@ -1,16 +1,16 @@
 ﻿using Corp.ERP.Inventory.Domain.Models;
 
-namespace Corp.ERP.Inventory.Application.ViewModel;
+namespace Corp.ERP.Inventory.Application.Dto;
 
-public class StorageVM
+public class StorageDto
 {
     public virtual int Id { get; set; }
     public virtual string Name { get; set; }
     public virtual string Address { get; set; }
 
-    public static implicit operator StorageVM(Storage _model)
+    public static implicit operator StorageDto(Storage _model)
     {
-        return new StorageVM
+        return new StorageDto
         {
             Id = _model.Id,
             Name = _model.Name,

@@ -1,8 +1,8 @@
 ﻿using Corp.ERP.Inventory.Domain.Models;
 
-namespace Corp.ERP.Inventory.Application.ViewModel;
+namespace Corp.ERP.Inventory.Application.Dto;
 
-public class UserVM
+public class UserDto
 {
     public virtual int Id { get; set; }
     public virtual string FirstName { get; set; }
@@ -10,9 +10,9 @@ public class UserVM
     public virtual string FullName { get; set; }
     public virtual string Email { get; set; }
 
-    public static implicit operator UserVM(User _model)
+    public static implicit operator UserDto(User _model)
     {
-        return new UserVM
+        return new UserDto
         {
             Id = _model.Id,
             FirstName = _model.FirstName,

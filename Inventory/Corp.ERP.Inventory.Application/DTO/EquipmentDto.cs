@@ -1,8 +1,8 @@
 ﻿using Corp.ERP.Inventory.Domain.Models;
 
-namespace Corp.ERP.Inventory.Application.ViewModel;
+namespace Corp.ERP.Inventory.Application.Dto;
 
-public class EquipmentVM
+public class EquipmentDto
 {
     public virtual int Id { get; set; }
     public virtual string Name { get; set; }
@@ -10,12 +10,12 @@ public class EquipmentVM
     public virtual string Code { get; set; }
     public virtual Boolean IsInUse { get; set; }
     public virtual DateTime? StartDateUsage { get; set; }
-    public virtual UserVM? UsedBy { get; set; }
-    public virtual StorageVM StorageUnit { get; set; }
+    public virtual UserDto? UsedBy { get; set; }
+    public virtual StorageDto StorageUnit { get; set; }
 
-    public static implicit operator EquipmentVM(Equipment _model)
+    public static implicit operator EquipmentDto(Equipment _model)
     {
-        return new EquipmentVM
+        return new EquipmentDto
         {
             Id = _model.Id,
             Name = _model.Name,
