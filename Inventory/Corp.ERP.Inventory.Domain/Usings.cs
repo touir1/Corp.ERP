@@ -1,1 +1,1 @@
-﻿global using Corp.ERP.Common.Domain.Interfaces;
+﻿global using Corp.ERP.Common.Domain.Contract;

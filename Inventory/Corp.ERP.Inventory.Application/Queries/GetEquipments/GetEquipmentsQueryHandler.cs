@@ -1,14 +1,13 @@
-﻿using Corp.ERP.Inventory.Application.Dto;
-using Corp.ERP.Inventory.Application.Services;
-using Corp.ERP.Inventory.Domain.Models;
+﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
+using Corp.ERP.Inventory.Application.Dto;
 using MediatR;
 
 namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 
 public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, GetEquipmentsQueryResult>
 {
-    private IInventoryRepositoryService _inventoryRepositoryService;
-    public GetEquipmentsQueryHandler(IInventoryRepositoryService repositoryService)
+    private IEquipmentRepositoryService _inventoryRepositoryService;
+    public GetEquipmentsQueryHandler(IEquipmentRepositoryService repositoryService)
     {
         _inventoryRepositoryService = repositoryService;
     }
@@ -16,7 +15,7 @@ public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, Get
     {
         return new GetEquipmentsQueryResult
         {
-            Result = _inventoryRepositoryService.GetEquipments()
+            Result = _inventoryRepositoryService.GetAll()
                 .Select(s => (EquipmentDto) s).ToList(),
         };
     }

@@ -1,4 +1,4 @@
-﻿namespace Corp.ERP.Common.Domain.Interfaces;
+﻿namespace Corp.ERP.Common.Domain.Contract.Models;
 
 public interface IEntity
 {

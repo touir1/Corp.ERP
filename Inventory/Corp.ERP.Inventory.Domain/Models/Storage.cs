@@ -1,4 +1,6 @@
-﻿namespace Corp.ERP.Inventory.Domain.Models;
+﻿using Corp.ERP.Common.Domain.Contract.Models;
+
+namespace Corp.ERP.Inventory.Domain.Models;
 
 public class Storage : IEntity
 {
