@@ -4,7 +4,7 @@ namespace Corp.ERP.Inventory.Application.Dto;
 
 public class UserDto
 {
-    public virtual int Id { get; set; }
+    public virtual Guid Id { get; set; }
     public virtual string FirstName { get; set; }
     public virtual string LastName { get; set; }
     public virtual string FullName { get; set; }

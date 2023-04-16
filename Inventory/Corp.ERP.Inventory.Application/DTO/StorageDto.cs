@@ -4,7 +4,7 @@ namespace Corp.ERP.Inventory.Application.Dto;
 
 public class StorageDto
 {
-    public virtual int Id { get; set; }
+    public virtual Guid Id { get; set; }
     public virtual string Name { get; set; }
     public virtual string Address { get; set; }
 

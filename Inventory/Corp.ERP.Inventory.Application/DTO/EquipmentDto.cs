@@ -4,7 +4,7 @@ namespace Corp.ERP.Inventory.Application.Dto;
 
 public class EquipmentDto
 {
-    public virtual int Id { get; set; }
+    public virtual Guid Id { get; set; }
     public virtual string Name { get; set; }
     public virtual string Description { get; set; }
     public virtual string Code { get; set; }
