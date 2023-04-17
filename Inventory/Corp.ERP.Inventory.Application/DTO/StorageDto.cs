@@ -10,6 +10,9 @@ public class StorageDto
 
     public static implicit operator StorageDto(Storage _model)
     {
+        if (_model == null) 
+            return null;
+
         return new StorageDto
         {
             Id = _model.Id,

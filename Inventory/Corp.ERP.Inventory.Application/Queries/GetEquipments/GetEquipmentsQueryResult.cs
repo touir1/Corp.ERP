@@ -4,5 +4,5 @@ namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 
 public class GetEquipmentsQueryResult
 {
-    public IList<EquipmentDto> Result { get; set; }
+    public IList<EquipmentDto> Equipments { get; set; }
 }

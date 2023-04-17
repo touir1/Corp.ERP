@@ -12,6 +12,9 @@ public class UserDto
 
     public static implicit operator UserDto(User _model)
     {
+        if (_model == null) 
+            return null;
+
         return new UserDto
         {
             Id = _model.Id,

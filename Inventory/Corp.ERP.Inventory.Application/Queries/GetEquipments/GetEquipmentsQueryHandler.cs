@@ -15,7 +15,7 @@ public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, Get
     {
         return Task.FromResult(new GetEquipmentsQueryResult
         {
-            Result = _inventoryRepositoryService.GetAll()
+            Equipments = _inventoryRepositoryService.GetAll()
                 .Select(s => (EquipmentDto) s).ToList(),
         });
     }
