@@ -1,8 +1,7 @@
 ﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
-using Corp.ERP.Inventory.Persistence;
 
-namespace Corp.ERP.Inventory.Storage.Repositories;
+namespace Corp.ERP.Inventory.Persistence.Repositories;
 
 public class EquipmentRepositoryService : IEquipmentRepositoryService
 {
@@ -14,7 +13,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public IList<Equipment> GetAll()
     {
-        return _inventoryContext.Equipments.ToList();
+        return _inventoryContext.Set<Equipment>().ToList();
     }
 
     public IList<Equipment> GetAll(Predicate<Equipment> predicate) => throw new NotImplementedException();

@@ -1,25 +1,25 @@
 ﻿using Corp.ERP.Inventory.Persistence.Configurations;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Corp.ERP.Inventory.Infrastructure.Configurations;
 
 namespace Corp.ERP.Inventory.Persistence;
 
 public class InventoryContext : DbContext
 {
-    private readonly IConfiguration _configuration;
+    private readonly DbConfiguration _configuration;
 
-    public DbSet<Equipment> Equipments { get; set; }
+    public DbSet<Equipment> Equipments { get; set; } //{ get => Set<Equipment>(); }
 
-    public InventoryContext(IConfiguration configuration)
+    public InventoryContext(DbConfiguration configuration)
     {
         _configuration = configuration;
-        Database.EnsureCreated();
+        //Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = _configuration.GetConnectionString("Default");
+        var connectionString = _configuration.ConnectionString;
 
         optionsBuilder.UseSqlite(connectionString);
     }
@@ -29,5 +29,6 @@ public class InventoryContext : DbContext
         base.OnModelCreating(builder);
 
         builder.ApplyConfigurationsFromAssembly(typeof(EquipmentConfiguration).Assembly);
+
     }
 }
