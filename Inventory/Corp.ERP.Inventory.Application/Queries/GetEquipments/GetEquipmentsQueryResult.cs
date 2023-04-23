@@ -1,4 +1,4 @@
-﻿using Corp.ERP.Inventory.Application.Dto;
+﻿using Corp.ERP.Inventory.Application.Contract.Dto;
 
 namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 

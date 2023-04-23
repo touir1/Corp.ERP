@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dfb926a6-5f09-4738-8336-c4e1ae292ee1</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Corp.ERP.Common.Application.Contract\Corp.ERP.Common.Application.Contract.csproj" />
+    <ProjectReference Include="..\Corp.ERP.Inventory.Application\Corp.ERP.Inventory.Application.csproj" />
+    <ProjectReference Include="..\Corp.ERP.Inventory.Persistence\Corp.ERP.Inventory.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

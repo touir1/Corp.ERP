@@ -2,6 +2,7 @@
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
+using Microsoft.Data.Sqlite;
 
 namespace Corp.ERP.Inventory.Persistence;
 
@@ -14,7 +15,20 @@ public class InventoryContext : DbContext
     public InventoryContext(DbConfiguration configuration)
     {
         _configuration = configuration;
-        //Database.EnsureCreated();
+        if (_configuration is not null && _configuration.EnsureCreated)
+        {
+            // ensure folder created
+            var builder = new SqliteConnectionStringBuilder(_configuration.ConnectionString);
+            var dbPath = builder.DataSource;
+            var directoryPath = Path.GetDirectoryName(dbPath);
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            // ensure sqlite database created
+            Database.EnsureCreated();
+        }
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

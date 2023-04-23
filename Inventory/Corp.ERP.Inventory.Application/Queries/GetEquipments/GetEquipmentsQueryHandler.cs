@@ -1,6 +1,6 @@
-﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
-using Corp.ERP.Inventory.Application.Dto;
-using MediatR;
+﻿using MediatR;
+using Corp.ERP.Inventory.Application.Contract.Repositories;
+using Corp.ERP.Inventory.Application.Contract.Dto;
 
 namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 

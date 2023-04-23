@@ -1,6 +1,6 @@
 ﻿using Corp.ERP.Inventory.Domain.Models;
 
-namespace Corp.ERP.Inventory.Application.Dto;
+namespace Corp.ERP.Inventory.Application.Contract.Dto;
 
 public class EquipmentDto
 {
