@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a4af7263-1ec4-4856-b4e4-3cc7f492646b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include=".editorconfig" />
+    <Content Include=".gitignore" />
+    <Content Include="README.md" />
+    <Content Include="src\app\app-routing.module.ts" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\app.component.spec.ts" />
+    <Content Include="src\app\app.component.ts" />
+    <Content Include="src\app\app.module.ts" />
+    <Content Include="src\assets\.gitkeep" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="src\main.ts" />
+    <Content Include="src\styles.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+
+  <Target Name="AngularBuild" AfterTargets="Build" Condition="'$(Configuration)' != 'Debug'">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build -- --delete-output-path=true --output-path='./dist'" />
+  </Target>
+
+  <Target Name="AngularDebug" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+    <Exec Command="npm install" />
+    <Exec Command="npm run build -- --delete-output-path=true --output-path='./dist' --source-map=true" />
+  </Target>
+
+</Project>
