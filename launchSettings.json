@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "corp.erp.presentation.web",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}",
+      "serviceActions": {
+        "corp.erp.presentation.web": "StartDebugging",
+        "corp.erp.inventory.service.restapi": "StartDebugging"
+      }
+    }
+  }
+}

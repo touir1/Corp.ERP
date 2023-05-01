@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /Corp.ERP.sln.bak
 /Inventory/Corp.ERP.Inventory.Service.RestAPI/Databases
+/Presentation/Corp.ERP.Presentation.Web/Frontend/.angular/cache/15.2.7

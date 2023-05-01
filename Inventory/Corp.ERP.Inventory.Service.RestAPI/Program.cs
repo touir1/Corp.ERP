@@ -2,9 +2,6 @@ using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Corp.ERP.Inventory.Persistence;
 using Corp.ERP.Inventory.Persistence.Repositories;
-using FluentAssertions.Common;
-using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
 
 namespace Corp.ERP.Inventory.Service.RestAPI;
 

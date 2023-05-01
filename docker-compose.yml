@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  corp.erp.presentation.web:
+    image: ${DOCKER_REGISTRY-}corperppresentationweb
+    build:
+      context: .
+      dockerfile: Presentation/Corp.ERP.Presentation.Web/Dockerfile
+
+  corp.erp.inventory.service.restapi:
+    image: ${DOCKER_REGISTRY-}corperpinventoryservicerestapi
+    build:
+      context: .
+      dockerfile: Inventory/Corp.ERP.Inventory.Service.RestAPI/Dockerfile
+
