@@ -18,6 +18,8 @@ RUN dotnet build "Corp.ERP.Inventory.Service.RestAPI.csproj" -c Release -o /app/
 
 FROM build AS publish
 RUN dotnet publish "Corp.ERP.Inventory.Service.RestAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN cp -f /app/publish/appsettings.prod.json /app/publish/appsettings.json
+RUN rm -rf /app/publish/appsettings.prod.json
 
 FROM base AS final
 WORKDIR /app
