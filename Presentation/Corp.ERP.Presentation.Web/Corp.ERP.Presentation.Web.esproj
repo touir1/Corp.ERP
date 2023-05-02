@@ -11,6 +11,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Corp.ERP.Presentation.Web</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\environments\" />
+    <Folder Include="src\environments\" />
   </ItemGroup>
 </Project>

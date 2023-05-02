@@ -7,8 +7,8 @@ EXPOSE 443
 FROM node:18-alpine as build
 WORKDIR /app/build
 COPY "Presentation/Corp.ERP.Presentation.Web" .
-RUN cp -f /app/build/src/app/environments/environment.prod.ts /app/build/src/app/environments/environment.ts
-RUN rm -rf /app/build/src/app/environments/environment.prod.ts
+RUN cp -f /app/build/src/environments/environment.prod.ts /app/build/src/environments/environment.ts
+RUN rm -rf /app/build/src/environments/environment.prod.ts
 RUN npm install
 RUN npm run build -- --output-path='/app/publish'
 
