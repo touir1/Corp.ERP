@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { forwardRef, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { InventoryModule } from '../../inventory.module';
 import { EquipmentDTO } from './DTOs/equipment.dto';
 import { GetEquipmentsUseCase } from './use-cases/get-equipments.use-case';
 
 @Injectable({
-  providedIn: InventoryModule
+  providedIn: forwardRef(() => InventoryModule)
 })
 export class EquipmentService {
 

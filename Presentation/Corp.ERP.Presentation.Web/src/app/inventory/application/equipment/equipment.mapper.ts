@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { forwardRef, Injectable } from '@angular/core';
 import { Equipment } from '../../domain/equipment/equipment.entity';
 import { InventoryModule } from '../../inventory.module';
 import { EquipmentDTO } from './DTOs/equipment.dto';
 
 @Injectable({
-  providedIn: InventoryModule
+  providedIn: forwardRef(() => InventoryModule)
 })
 export class EquipmentMapper {
 

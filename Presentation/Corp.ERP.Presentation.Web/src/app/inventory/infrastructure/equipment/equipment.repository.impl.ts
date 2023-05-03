@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { forwardRef, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { Equipment } from "../../domain/equipment/equipment.entity";
 import { EquipmentRepository } from "../../domain/equipment/equipment.repository";
@@ -7,7 +7,7 @@ import { EquipmentApi } from "./equipment.api";
 import { GetAllEquipmentsRequest } from "./requests/get-all-equipments.request";
 
 @Injectable({
-  providedIn: InventoryModule
+  providedIn: forwardRef(() => InventoryModule)
 })
 export class EquipmentRepositoryImpl implements EquipmentRepository {
 
