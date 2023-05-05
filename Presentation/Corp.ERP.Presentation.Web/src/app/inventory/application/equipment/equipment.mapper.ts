@@ -1,7 +1,7 @@
 import { forwardRef, Injectable } from '@angular/core';
 import { Equipment } from '../../domain/equipment/equipment.entity';
 import { InventoryModule } from '../../inventory.module';
-import { UserMapper } from '../external/user.mapper';
+import { UserMapper } from '../user/user.mapper';
 import { StorageUnitMapper } from '../storage-unit/storage-unit.mapper';
 import { EquipmentDTO } from './DTOs/equipment.dto';
 

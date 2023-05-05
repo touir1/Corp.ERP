@@ -1,5 +1,5 @@
 import { forwardRef, Injectable } from "@angular/core";
-import { User } from "../../domain/external/user.entity";
+import { User } from "../../domain/user/user.entity";
 import { InventoryModule } from "../../inventory.module";
 import { UserDTO } from "../equipment/DTOs/user.dto";
 

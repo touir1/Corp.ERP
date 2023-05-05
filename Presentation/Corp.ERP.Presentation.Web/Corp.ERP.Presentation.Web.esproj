@@ -13,7 +13,7 @@
   <ItemGroup>
     <Folder Include="src\app\inventory\application\equipment\DTOs\" />
     <Folder Include="src\app\inventory\application\equipment\use-cases\" />
-    <Folder Include="src\app\inventory\application\external\" />
+    <Folder Include="src\app\inventory\application\user\" />
     <Folder Include="src\app\inventory\application\storage-unit\" />
     <Folder Include="src\app\inventory\domain\equipment\" />
     <Folder Include="src\app\inventory\domain\storage-unit\" />
