@@ -14,27 +14,27 @@ export class EquipmentMapper {
 
   mapToDTO(equipment: Equipment): EquipmentDTO {
     return {
-      id: equipment.Id,
-      code: equipment.Code,
-      description: equipment.Description,
-      isInUse: equipment.IsInUse,
-      name: equipment.Name,
-      startDateUsage: equipment.StartDateUsage,
-      storageUnit: this.storageUnitMapper.mapToDTO(equipment.StorageUnit),
-      usedBy: this.userMapper.mapToDTO(equipment.UsedBy)
+      id: equipment.id,
+      code: equipment.code,
+      description: equipment.description,
+      isInUse: equipment.isInUse,
+      name: equipment.name,
+      startDateUsage: equipment.startDateUsage,
+      storageUnit: this.storageUnitMapper.mapToDTO(equipment.storageUnit),
+      usedBy: this.userMapper.mapToDTO(equipment.usedBy)
     };
   }
 
   mapToDomain(equipmentDTO: EquipmentDTO): Equipment {
     return {
-      Id: equipmentDTO.id,
-      Code: equipmentDTO.code,
-      Description: equipmentDTO.description,
-      IsInUse: equipmentDTO.isInUse,
-      Name: equipmentDTO.name,
-      StartDateUsage: equipmentDTO.startDateUsage,
-      StorageUnit: this.storageUnitMapper.mapToDomain(equipmentDTO.storageUnit),
-      UsedBy: this.userMapper.mapToDomain(equipmentDTO.usedBy)
+      id: equipmentDTO.id,
+      code: equipmentDTO.code,
+      description: equipmentDTO.description,
+      isInUse: equipmentDTO.isInUse,
+      name: equipmentDTO.name,
+      startDateUsage: equipmentDTO.startDateUsage,
+      storageUnit: this.storageUnitMapper.mapToDomain(equipmentDTO.storageUnit),
+      usedBy: this.userMapper.mapToDomain(equipmentDTO.usedBy)
     };
   }
 

@@ -9,19 +9,19 @@ import { UserDTO } from "../equipment/DTOs/user.dto";
 export class UserMapper {
   mapToDTO(user: User): UserDTO {
     return {
-      id: user.Id,
-      email: user.Email,
-      firstName: user.FirstName,
-      lastName: user.LastName
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName
     };
   }
 
   mapToDomain(userDTO: UserDTO): User {
     return {
-      Id: userDTO.id,
-      Email: userDTO.email,
-      FirstName: userDTO.firstName,
-      LastName: userDTO.lastName
+      id: userDTO.id,
+      email: userDTO.email,
+      firstName: userDTO.firstName,
+      lastName: userDTO.lastName
     };
   }
 }

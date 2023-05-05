@@ -9,11 +9,15 @@ import { EquipmentRepositoryImpl } from './infrastructure/equipment/equipment.re
 import { EquipmentMapper } from './application/equipment/equipment.mapper';
 import { GetEquipmentsUseCase } from './application/equipment/use-cases/get-equipments.use-case';
 import { InventoryDashboardComponent } from './presentation/inventory-dashboard/inventory-dashboard.component';
+import { InventoryRoutingModule } from './inventory-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    InventoryRoutingModule
   ],
   declarations: [
     // declare any components, directives, or pipes here

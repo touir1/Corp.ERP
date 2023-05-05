@@ -1,6 +1,6 @@
 export interface StorageUnit {
-  Id: string;
-  Name: string;
-  Address: string;
+  id: string;
+  name: string;
+  address: string;
 
 }

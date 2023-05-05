@@ -17,7 +17,7 @@ export class EquipmentRepositoryImpl implements EquipmentRepository {
 
   getAll(): Observable<Equipment[]> {
     return this.api.getAll(new GetAllEquipmentsRequest()).pipe(
-      map(response => response.Equipments)
+      map(response => response.equipments)
     );
   }
 

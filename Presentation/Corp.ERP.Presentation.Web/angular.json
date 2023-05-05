@@ -70,7 +70,9 @@
               "browserTarget": "Corp.ERP.Presentation.Web:build:production"
             },
             "development": {
-              "browserTarget": "Corp.ERP.Presentation.Web:build:development"
+              "browserTarget": "Corp.ERP.Presentation.Web:build:development",
+              "port": 4200,
+              "proxyConfig": "src/proxy-dev.conf.json"
             }
           },
           "defaultConfiguration": "development"
