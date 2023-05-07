@@ -10,7 +10,7 @@ public class InventoryContext : DbContext
 {
     private readonly DbConfiguration _configuration;
 
-    public DbSet<Equipment> Equipments { get; set; } //{ get => Set<Equipment>(); }
+    //public DbSet<Equipment> Equipments { get; set; } //{ get => Set<Equipment>(); }
 
     public InventoryContext(DbConfiguration configuration)
     {

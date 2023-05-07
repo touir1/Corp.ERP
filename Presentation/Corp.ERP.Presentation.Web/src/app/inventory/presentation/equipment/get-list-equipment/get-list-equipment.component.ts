@@ -11,7 +11,7 @@ export class GetListEquipmentComponent implements OnInit {
   constructor(private service: EquipmentService) { }
 
   allEquipmentsSource: EquipmentDTO[] = [];
-  displayedColumns: string[] = [];
+  displayedColumns: string[] = ["name","code","description","storageUnit","isInUse","startDateUsage","usedBy"];
 
   ngOnInit(): void {
     this.get();

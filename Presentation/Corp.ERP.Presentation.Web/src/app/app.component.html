@@ -9,12 +9,12 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container [hasBackdrop]="false">
-  <mat-sidenav #sidenav [mode]="'push'">
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="'/home'" routerLinkActive="active-link" (click)="sidenav.close()"><mat-icon>home</mat-icon><span> Home </span></a>
-      <a mat-list-item [routerLink]="'/inventory'" routerLinkActive="active-link" (click)="sidenav.close()"><mat-icon>dashboard</mat-icon><span> Inventory </span></a>
-    </mat-nav-list>
-  </mat-sidenav>
+    <mat-sidenav #sidenav [mode]="'side'">
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="'/home'" routerLinkActive="active-link" (click)="sidenav.close()"><mat-icon>home</mat-icon><span> Home </span></a>
+            <a mat-list-item [routerLink]="'/inventory'" routerLinkActive="active-link" (click)="sidenav.close()"><mat-icon>dashboard</mat-icon><span> Inventory </span></a>
+        </mat-nav-list>
+    </mat-sidenav>
   <mat-sidenav-content (click)="sidenav.close()">
     <div style="height: calc(100vh - 74px); padding: 5px; ">
       <router-outlet></router-outlet>

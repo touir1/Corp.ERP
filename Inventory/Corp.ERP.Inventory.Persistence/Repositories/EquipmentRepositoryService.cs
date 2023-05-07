@@ -1,5 +1,6 @@
 ﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
@@ -13,7 +14,10 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public IList<Equipment> GetAll()
     {
-        return _inventoryContext.Set<Equipment>().ToList();
+        return _inventoryContext.Set<Equipment>()
+            .Include(inc => inc.StorageUnit)
+            .Include(inc => inc.UsedBy)
+            .ToList();
     }
 
     public IList<Equipment> GetAll(Predicate<Equipment> predicate) => throw new NotImplementedException();

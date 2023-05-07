@@ -11,13 +11,15 @@ import { GetEquipmentsUseCase } from './application/equipment/use-cases/get-equi
 import { InventoryDashboardComponent } from './presentation/inventory-dashboard/inventory-dashboard.component';
 import { InventoryRoutingModule } from './inventory-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    InventoryRoutingModule
+    InventoryRoutingModule,
+    MatTableModule
   ],
   declarations: [
     // declare any components, directives, or pipes here

@@ -63,7 +63,9 @@ public class EquipmentRepositoryServiceUnitTests
 
         var mockSet = NSubstituteEFCoreUtils.GetDbSetSubstitute(equipments);
         mockContext.Set<Equipment>().Returns(mockSet);
-        mockContext.Equipments.Returns(mockContext.Set<Equipment>());
+        //mockContext.Equipments.Returns(mockContext.Set<Equipment>());
+        //mockContext.Equipments.Include("Equipment.StorageUnit").Returns(mockSet);
+        //mockContext.Equipments.Include("Equipment.UsedBy").Returns(mockSet);
 
         var equipmentRepo = new EquipmentRepositoryService(mockContext);
 

@@ -9,17 +9,17 @@ import { StorageUnitDTO } from "../equipment/DTOs/storage-unit.dto";
 export class StorageUnitMapper {
   mapToDTO(storageUnit: StorageUnit): StorageUnitDTO {
     return {
-      id: storageUnit.id,
-      address: storageUnit.address,
-      name: storageUnit.name
+      id: storageUnit?.id,
+      address: storageUnit?.address,
+      name: storageUnit?.name
     };
   }
 
   mapToDomain(storageUnitDTO: StorageUnitDTO): StorageUnit {
     return {
-      id: storageUnitDTO.id,
-      address: storageUnitDTO.address,
-      name: storageUnitDTO.name
+      id: storageUnitDTO?.id,
+      address: storageUnitDTO?.address,
+      name: storageUnitDTO?.name
     };
   }
 }
