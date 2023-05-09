@@ -13,40 +13,46 @@ internal class StorageRepositoryService : IStorageRepositoryService
         _inventoryContext = inventoryContext;
     }
 
+    public async Task<IList<Storage>> GetAllAsync()
+    {
+        return await _inventoryContext.Storages
+            .ToListAsync();
+    }
+
+    public async Task<IList<Storage>> GetAllAsync(Predicate<Storage> predicate)
+    {
+        return await _inventoryContext.Storages
+            .Where(w => predicate(w))
+            .ToListAsync();
+    }
+
+    public async Task<Storage> GetByIdAsync(Guid id)
+    {
+        return await _inventoryContext.Storages
+            .FirstAsync(w => w.Id == id);
+    }
+
+    public async Task<Storage> GetFirstOrDefaultAsync(Predicate<Storage> predicate, Storage defaultValue)
+    {
+        return await _inventoryContext.Storages
+            .FirstAsync(w => predicate(w)) ?? defaultValue;
+    }
+
+    public async Task UpdateAsync(Storage entity)
+    {
+        _inventoryContext.Entry(entity).State = EntityState.Modified;
+        await _inventoryContext.SaveChangesAsync();
+    }
+
     public async Task AddAsync(Storage entity)
     {
-        await _inventoryContext.Set<Storage>().AddAsync(entity);
+        await _inventoryContext.Storages.AddAsync(entity);
         await _inventoryContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Storage entity)
     {
-        _inventoryContext.Set<Storage>().Remove(entity);
+        _inventoryContext.Storages.Remove(entity);
         await _inventoryContext.SaveChangesAsync();
-    }
-
-    public async Task<IList<Storage>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IList<Storage>> GetAllAsync(Predicate<Storage> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Storage> GetByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Storage> GetFirstOrDefaultAsync(Predicate<Storage> predicate, Storage defaultValue)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task UpdateAsync(Storage entity)
-    {
-        throw new NotImplementedException();
     }
 }

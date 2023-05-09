@@ -1,42 +1,58 @@
 ﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
 public class UserRepositoryService : IUserRepositoryService
 {
-    public Task AddAsync(User entity)
+    private readonly InventoryContext _inventoryContext;
+
+    public UserRepositoryService(InventoryContext inventoryContext)
     {
-        throw new NotImplementedException();
+        _inventoryContext = inventoryContext;
     }
 
-    public Task DeleteAsync(User entity)
+    public async Task<IList<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _inventoryContext.Users
+            .ToListAsync();
     }
 
-    public Task<IList<User>> GetAllAsync()
+    public async Task<IList<User>> GetAllAsync(Predicate<User> predicate)
     {
-        throw new NotImplementedException();
+        return await _inventoryContext.Users
+            .Where(w => predicate(w))
+            .ToListAsync();
     }
 
-    public Task<IList<User>> GetAllAsync(Predicate<User> predicate)
+    public async Task<User> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _inventoryContext.Users
+            .FirstAsync(w => w.Id == id);
     }
 
-    public Task<User> GetByIdAsync(Guid id)
+    public async Task<User> GetFirstOrDefaultAsync(Predicate<User> predicate, User defaultValue)
     {
-        throw new NotImplementedException();
+        return await _inventoryContext.Users
+            .FirstAsync(w => predicate(w)) ?? defaultValue;
     }
 
-    public Task<User> GetFirstOrDefaultAsync(Predicate<User> predicate, User defaultValue)
+    public async Task UpdateAsync(User entity)
     {
-        throw new NotImplementedException();
+        _inventoryContext.Entry(entity).State = EntityState.Modified;
+        await _inventoryContext.SaveChangesAsync();
     }
 
-    public Task UpdateAsync(User entity)
+    public async Task AddAsync(User entity)
     {
-        throw new NotImplementedException();
+        await _inventoryContext.Users.AddAsync(entity);
+        await _inventoryContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(User entity)
+    {
+        _inventoryContext.Users.Remove(entity);
+        await _inventoryContext.SaveChangesAsync();
     }
 }

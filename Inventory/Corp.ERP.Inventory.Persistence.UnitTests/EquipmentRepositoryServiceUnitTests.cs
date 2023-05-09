@@ -11,8 +11,9 @@ namespace Corp.ERP.Inventory.Persistance.UnitTests;
 
 public class EquipmentRepositoryServiceUnitTests
 {
+    
     [Fact]
-    public async void ShouldReturnTwoEquipmentsWhenGetAll()
+    public async void ShouldReturnTwoEquipmentsWhenGetAllAsync()
     {
         // Arrange
         var count = 2;
@@ -54,13 +55,7 @@ public class EquipmentRepositoryServiceUnitTests
             }
         };
 
-        var mockConfiguration = Substitute.For<DbConfiguration>();
-        var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
-
-        var mockSetEquipments = NSubstituteEFCoreUtils.GetDbSetSubstitute(equipments);
-        mockContext.Set<Equipment>().Returns(mockSetEquipments);
-        mockContext.Equipments = mockSetEquipments;
-
+        var mockContext = PrepareContext(equipments);
         var equipmentRepo = new EquipmentRepositoryService(mockContext);
 
         // Act
@@ -68,6 +63,17 @@ public class EquipmentRepositoryServiceUnitTests
 
         // Assert
         result.Should().HaveCount(count);
-        
+    }
+
+    public InventoryContext PrepareContext(IList<Equipment> list)
+    {
+        var mockConfiguration = Substitute.For<DbConfiguration>();
+        var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
+
+        var mockSetEquipments = NSubstituteEFCoreUtils.GetDbSetSubstitute(list);
+        mockContext.Set<Equipment>().Returns(mockSetEquipments);
+        mockContext.Equipments = mockSetEquipments;
+
+        return mockContext;
     }
 }

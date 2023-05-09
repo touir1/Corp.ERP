@@ -22,7 +22,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public async Task<IList<Equipment>> GetAllAsync(Predicate<Equipment> predicate)
     {
-        return await _inventoryContext.Set<Equipment>()
+        return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .Where(w => predicate(w))
@@ -31,7 +31,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public async Task<Equipment> GetByIdAsync(Guid id)
     {
-        return await _inventoryContext.Set<Equipment>()
+        return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .FirstAsync(w => w.Id == id);
@@ -39,7 +39,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public async Task<Equipment> GetFirstOrDefaultAsync(Predicate<Equipment> predicate, Equipment defaultValue)
     {
-        return await _inventoryContext.Set<Equipment>()
+        return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .FirstAsync(w => predicate(w)) ?? defaultValue;
@@ -53,13 +53,13 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public async Task AddAsync(Equipment entity)
     {
-        await _inventoryContext.Set<Equipment>().AddAsync(entity);
+        await _inventoryContext.Equipments.AddAsync(entity);
         await _inventoryContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Equipment entity)
     {
-        _inventoryContext.Set<Equipment>().Remove(entity);
+        _inventoryContext.Equipments.Remove(entity);
         await _inventoryContext.SaveChangesAsync();
     }
 }
