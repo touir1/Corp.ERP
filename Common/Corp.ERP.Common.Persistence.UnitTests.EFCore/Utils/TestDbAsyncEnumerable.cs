@@ -1,9 +1,8 @@
-﻿using System.Data.Entity.Infrastructure;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
 
-internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IDbAsyncEnumerable<T>, IQueryable<T>
+internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IAsyncEnumerable<T>, IQueryable<T>
 {
     public TestDbAsyncEnumerable(IEnumerable<T> enumerable)
         : base(enumerable)
@@ -13,14 +12,14 @@ internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IDbAsyncEnumerable
         : base(expression)
     { }
 
-    public IDbAsyncEnumerator<T> GetAsyncEnumerator()
+    public IAsyncEnumerator<T> GetAsyncEnumerator()
     {
         return new TestDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
     }
 
-    IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
+    public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
     {
-        return GetAsyncEnumerator();
+        return new TestDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
     }
 
     IQueryProvider IQueryable.Provider

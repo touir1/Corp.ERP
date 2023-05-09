@@ -1,9 +1,9 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
 
-internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
+internal class TestDbAsyncQueryProvider<TEntity> : IAsyncQueryProvider
 {
     private readonly IQueryProvider _inner;
 
@@ -40,5 +40,10 @@ internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider
     public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
     {
         return Task.FromResult(Execute<TResult>(expression));
+    }
+
+    TResult IAsyncQueryProvider.ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+    {
+        return _inner.Execute<TResult>(expression);
     }
 }

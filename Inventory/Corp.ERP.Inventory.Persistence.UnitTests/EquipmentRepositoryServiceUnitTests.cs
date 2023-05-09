@@ -3,19 +3,13 @@ using Corp.ERP.Inventory.Domain.Models;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Corp.ERP.Inventory.Persistence;
 using Corp.ERP.Inventory.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using NSubstitute;
-using NSubstitute.Extensions;
 
 namespace Corp.ERP.Inventory.Persistance.UnitTests;
 
 public class EquipmentRepositoryServiceUnitTests
 {
     [Fact]
-    public void ShouldReturnTwoEquipmentsWhenGetAll()
+    public async void ShouldReturnTwoEquipmentsWhenGetAll()
     {
         // Arrange
         var count = 2;
@@ -70,7 +64,7 @@ public class EquipmentRepositoryServiceUnitTests
         var equipmentRepo = new EquipmentRepositoryService(mockContext);
 
         // Act
-        IList<Equipment> result = equipmentRepo.GetAll();
+        IList<Equipment> result = await equipmentRepo.GetAllAsync();
 
         // Assert
         result.Should().HaveCount(count);

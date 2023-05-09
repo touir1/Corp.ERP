@@ -12,23 +12,23 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
         _inventoryContext = inventoryContext;
     }
 
-    public IList<Equipment> GetAll()
+    public async Task<IList<Equipment>> GetAllAsync()
     {
-        return _inventoryContext.Set<Equipment>()
+        return await _inventoryContext.Set<Equipment>()
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
-            .ToList();
+            .ToListAsync();
     }
 
-    public IList<Equipment> GetAll(Predicate<Equipment> predicate) => throw new NotImplementedException();
+    public Task<IList<Equipment>> GetAllAsync(Predicate<Equipment> predicate) => throw new NotImplementedException();
 
-    public Equipment GetById(Guid id) => throw new NotImplementedException();
+    public Task<Equipment> GetByIdAsync(Guid id) => throw new NotImplementedException();
 
-    public Equipment GetFirstOrDefault(Predicate<Equipment> predicate, Equipment defaultValue) => throw new NotImplementedException();
+    public Task<Equipment> GetFirstOrDefaultAsync(Predicate<Equipment> predicate, Equipment defaultValue) => throw new NotImplementedException();
 
-    public void Update(Equipment entity) => throw new NotImplementedException();
+    public Task UpdateAsync(Equipment entity) => throw new NotImplementedException();
 
-    public void Add(Equipment entity) => throw new NotImplementedException();
+    public Task AddAsync(Equipment entity) => throw new NotImplementedException();
 
-    public void Delete(Equipment entity) => throw new NotImplementedException();
+    public Task DeleteAsync(Equipment entity) => throw new NotImplementedException();
 }

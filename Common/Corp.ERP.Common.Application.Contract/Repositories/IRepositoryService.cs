@@ -4,11 +4,11 @@ namespace Corp.ERP.Common.Application.Repositories;
 
 public interface IRepositoryService<T> where T : IEntity
 {
-    IList<T> GetAll();
-    T GetById(Guid id);
-    IList<T> GetAll(Predicate<T> predicate);
-    T GetFirstOrDefault(Predicate<T> predicate, T defaultValue);
-    void Update(T entity);
-    void Delete(T entity);
-    void Add(T entity);
+    Task<IList<T>> GetAllAsync();
+    Task<T> GetByIdAsync(Guid id);
+    Task<IList<T>> GetAllAsync(Predicate<T> predicate);
+    Task<T> GetFirstOrDefaultAsync(Predicate<T> predicate, T defaultValue);
+    Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
+    Task AddAsync(T entity);
 }

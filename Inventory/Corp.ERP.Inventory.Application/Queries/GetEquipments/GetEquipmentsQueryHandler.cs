@@ -11,12 +11,12 @@ public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, Get
     {
         _inventoryRepositoryService = repositoryService;
     }
-    public Task<GetEquipmentsQueryResult> Handle(GetEquipmentsQuery request, CancellationToken cancellationToken)
+    public async Task<GetEquipmentsQueryResult> Handle(GetEquipmentsQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(new GetEquipmentsQueryResult
+        var result = await _inventoryRepositoryService.GetAllAsync();
+        return new GetEquipmentsQueryResult
         {
-            Equipments = _inventoryRepositoryService.GetAll()
-                .Select(s => (EquipmentDto) s).ToList(),
-        });
+            Equipments = result.Select(s => (EquipmentDto) s).ToList(),
+        };
     }
 }

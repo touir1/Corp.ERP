@@ -8,7 +8,7 @@ namespace Corp.ERP.Inventory.Application.UnitTests
     public class InventoryQueriesUnitTests
     {
         [Fact]
-        public void ShouldReturnTwoEquipmentsWhenGetEquipments()
+        public async Task ShouldReturnTwoEquipmentsWhenGetEquipmentsAsync()
         {
             // Arrange
             var count = 2;
@@ -26,32 +26,33 @@ namespace Corp.ERP.Inventory.Application.UnitTests
                 LastName = "User",
             };
             IList<Equipment> equipments = new List<Equipment>()
-        {
-            new Equipment
             {
-                Id = Guid.NewGuid(),
-                Code = "TEST_1",
-                Description = "Description_1",
-                IsInUse = false,
-                Name = "Test 1",
-                StorageUnit = storage
-            },
                 new Equipment
-            {
-                Id = Guid.NewGuid() ,
-                Code = "Test_2",
-                Description = "Description_2",
-                IsInUse = true,
-                Name = "Test 2",
-                StorageUnit = storage,
-                StartDateUsage = new DateTime(2023,01,01,8,0,0),
-                UsedBy = user,
-                UsedById = user.Id
-            }
-        };
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "TEST_1",
+                    Description = "Description_1",
+                    IsInUse = false,
+                    Name = "Test 1",
+                    StorageUnit = storage
+                },
+                    new Equipment
+                {
+                    Id = Guid.NewGuid() ,
+                    Code = "Test_2",
+                    Description = "Description_2",
+                    IsInUse = true,
+                    Name = "Test 2",
+                    StorageUnit = storage,
+                    StartDateUsage = new DateTime(2023,01,01,8,0,0),
+                    UsedBy = user,
+                    UsedById = user.Id
+                }
+            };
 
             IEquipmentRepositoryService service = Substitute.For<IEquipmentRepositoryService>();
-            service.GetAll().Returns(equipments);
+
+            service.GetAllAsync().Returns(Task.FromResult(equipments));
 
             GetEquipmentsQuery query = Substitute.For<GetEquipmentsQuery>();
             GetEquipmentsQueryHandler handler = Substitute.For<GetEquipmentsQueryHandler>(service);

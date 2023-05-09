@@ -1,8 +1,6 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
 
-namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
-
-internal class TestDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
+internal class TestDbAsyncEnumerator<T> : IAsyncEnumerator<T>
 {
     private readonly IEnumerator<T> _inner;
 
@@ -11,23 +9,26 @@ internal class TestDbAsyncEnumerator<T> : IDbAsyncEnumerator<T>
         _inner = inner;
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
         _inner.Dispose();
+        return new ValueTask();
     }
 
-    public Task<bool> MoveNextAsync(CancellationToken cancellationToken)
+    public ValueTask<bool> MoveNextAsync(CancellationToken cancellationToken)
     {
-        return Task.FromResult(_inner.MoveNext());
+        return new ValueTask<bool>(_inner.MoveNext());
     }
 
-    public T Current
+    public T Current => _inner.Current;
+
+    public ValueTask InitializeAsync(CancellationToken cancellationToken)
     {
-        get { return _inner.Current; }
+        return default;
     }
 
-    object IDbAsyncEnumerator.Current
+    public ValueTask<bool> MoveNextAsync()
     {
-        get { return Current; }
+        return new ValueTask<bool>(_inner.MoveNext());
     }
 }
