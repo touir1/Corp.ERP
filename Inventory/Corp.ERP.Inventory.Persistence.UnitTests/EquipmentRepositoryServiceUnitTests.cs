@@ -3,6 +3,9 @@ using Corp.ERP.Inventory.Domain.Models;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Corp.ERP.Inventory.Persistence;
 using Corp.ERP.Inventory.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using NSubstitute;
 
 namespace Corp.ERP.Inventory.Persistance.UnitTests;
 
@@ -53,13 +56,10 @@ public class EquipmentRepositoryServiceUnitTests
 
         var mockConfiguration = Substitute.For<DbConfiguration>();
         var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
-        //mockContext.Database.Returns(Substitute.For<DatabaseFacade>(mockContext));
 
-        var mockSet = NSubstituteEFCoreUtils.GetDbSetSubstitute(equipments);
-        mockContext.Set<Equipment>().Returns(mockSet);
-        //mockContext.Equipments.Returns(mockContext.Set<Equipment>());
-        //mockContext.Equipments.Include("Equipment.StorageUnit").Returns(mockSet);
-        //mockContext.Equipments.Include("Equipment.UsedBy").Returns(mockSet);
+        var mockSetEquipments = NSubstituteEFCoreUtils.GetDbSetSubstitute(equipments);
+        mockContext.Set<Equipment>().Returns(mockSetEquipments);
+        mockContext.Equipments = mockSetEquipments;
 
         var equipmentRepo = new EquipmentRepositoryService(mockContext);
 

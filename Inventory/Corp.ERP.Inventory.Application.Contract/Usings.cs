@@ -1,0 +1,1 @@
+﻿global using Corp.ERP.Inventory.Domain.Models;

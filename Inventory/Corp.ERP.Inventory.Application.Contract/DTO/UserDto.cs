@@ -1,6 +1,4 @@
-﻿using Corp.ERP.Inventory.Domain.Models;
-
-namespace Corp.ERP.Inventory.Application.Contract.Dto;
+﻿namespace Corp.ERP.Inventory.Application.Contract.Dto;
 
 public class UserDto
 {
@@ -21,6 +19,21 @@ public class UserDto
             FirstName = _model.FirstName,
             LastName = _model.LastName,
             FullName = _model.FullName,
+            Email = _model.Email,
+        };
+    }
+
+    public static implicit operator User(UserDto _model)
+    {
+        if (_model == null)
+            return null;
+
+        return new User
+        {
+            Id = _model.Id,
+            FirstName = _model.FirstName,
+            LastName = _model.LastName,
+            //FullName = _model.FullName,
             Email = _model.Email,
         };
     }

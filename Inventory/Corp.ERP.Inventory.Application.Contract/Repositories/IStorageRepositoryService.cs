@@ -2,6 +2,6 @@
 
 namespace Corp.ERP.Inventory.Application.Contract.Repositories;
 
-public interface IEquipmentRepositoryService : IRepositoryService<Equipment>
+public interface IStorageRepositoryService: IRepositoryService<Storage>
 {
 }

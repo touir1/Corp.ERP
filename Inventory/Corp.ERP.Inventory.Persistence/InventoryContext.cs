@@ -1,8 +1,8 @@
 ﻿using Corp.ERP.Inventory.Persistence.Configurations;
-using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Microsoft.Data.Sqlite;
+using Corp.ERP.Inventory.Domain.Models;
 
 namespace Corp.ERP.Inventory.Persistence;
 
@@ -10,7 +10,7 @@ public class InventoryContext : DbContext
 {
     private readonly DbConfiguration _configuration;
 
-    //public DbSet<Equipment> Equipments { get; set; } //{ get => Set<Equipment>(); }
+    public DbSet<Equipment> Equipments { get; set; } //{ get => Set<Equipment>(); }
 
     public InventoryContext(DbConfiguration configuration)
     {

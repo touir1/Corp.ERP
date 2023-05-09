@@ -1,6 +1,4 @@
-﻿using Corp.ERP.Inventory.Domain.Models;
-
-namespace Corp.ERP.Inventory.Application.Contract.Dto;
+﻿namespace Corp.ERP.Inventory.Application.Contract.Dto;
 
 public class StorageDto
 {
@@ -14,6 +12,19 @@ public class StorageDto
             return null;
 
         return new StorageDto
+        {
+            Id = _model.Id,
+            Name = _model.Name,
+            Address = _model.Address,
+        };
+    }
+
+    public static implicit operator Storage(StorageDto _model)
+    {
+        if (_model == null)
+            return null;
+
+        return new Storage
         {
             Id = _model.Id,
             Name = _model.Name,

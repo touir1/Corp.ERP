@@ -14,7 +14,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
 
     public async Task<IList<Equipment>> GetAllAsync()
     {
-        return await _inventoryContext.Set<Equipment>()
+        return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .ToListAsync();

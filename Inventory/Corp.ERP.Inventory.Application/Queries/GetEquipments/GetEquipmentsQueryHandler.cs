@@ -6,14 +6,14 @@ namespace Corp.ERP.Inventory.Application.Queries.GetEquipments;
 
 public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, GetEquipmentsQueryResult>
 {
-    private IEquipmentRepositoryService _inventoryRepositoryService;
-    public GetEquipmentsQueryHandler(IEquipmentRepositoryService repositoryService)
+    private IEquipmentRepositoryService _equipmentService;
+    public GetEquipmentsQueryHandler(IEquipmentRepositoryService quipmentRepositoryService)
     {
-        _inventoryRepositoryService = repositoryService;
+        _equipmentService = quipmentRepositoryService;
     }
     public async Task<GetEquipmentsQueryResult> Handle(GetEquipmentsQuery request, CancellationToken cancellationToken)
     {
-        var result = await _inventoryRepositoryService.GetAllAsync();
+        var result = await _equipmentService.GetAllAsync();
         return new GetEquipmentsQueryResult
         {
             Equipments = result.Select(s => (EquipmentDto) s).ToList(),

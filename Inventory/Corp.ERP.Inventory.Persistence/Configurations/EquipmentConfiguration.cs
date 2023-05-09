@@ -1,7 +1,6 @@
 ﻿using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace Corp.ERP.Inventory.Persistence.Configurations;
 
