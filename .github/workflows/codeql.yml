@@ -20,6 +20,9 @@ on:
   schedule:
     - cron: '17 4 * * 1'
 
+env:
+  SOLUTION_FILE_PATH: './Corp.ERP.sln'
+
 jobs:
   analyze:
     name: Analyze
