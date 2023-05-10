@@ -79,7 +79,7 @@ jobs:
     # dotnet build  --no-restore --exclude 'Corp.ERP.Presentation.Web' ${{env.SOLUTION_FILE_PATH}}
       
     - name: dotnet test
-      run: dotnet test ${{env.SOLUTION_FILE_PATH}}
+      run: dotnet test --no-restore ${{env.SOLUTION_FILE_PATH}}
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
