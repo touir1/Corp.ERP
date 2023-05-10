@@ -60,6 +60,10 @@ jobs:
       with:
         dotnet-version: '6.0'
         include-prerelease: True
+    
+    # .Net restore
+    - name: Initialize dotnet
+      run: dotnet restore
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
