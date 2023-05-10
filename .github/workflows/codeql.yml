@@ -73,10 +73,9 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: dotnet build
       run: |
-        $projects = Get-ChildItem -Path ./ -Filter *.csproj -Recurse
-        foreach ($project in $projects) {
-          dotnet build --no-restore $project.FullName
-        }
+        for project in $(find ./ -type f -name "*.csproj"); do
+          dotnet build --no-restore --configuration Release "$project"
+        done
     # dotnet build  --no-restore --exclude 'Corp.ERP.Presentation.Web' ${{env.SOLUTION_FILE_PATH}}
       
     - name: dotnet test
