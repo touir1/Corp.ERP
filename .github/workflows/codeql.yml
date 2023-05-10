@@ -56,14 +56,14 @@ jobs:
 
     # Setup .Net
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '6.0'
         include-prerelease: True
     
     # .Net restore
     - name: Initialize dotnet
-      run: dotnet restore
+      run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
