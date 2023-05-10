@@ -72,7 +72,12 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: dotnet build
-      run: dotnet build  --no-restore --exclude 'Corp.ERP.Presentation.Web' ${{env.SOLUTION_FILE_PATH}}
+      run: |
+        $projects = Get-ChildItem -Path ./ -Filter *.csproj -Recurse
+        foreach ($project in $projects) {
+          dotnet build --no-restore $project.FullName
+        }
+    # dotnet build  --no-restore --exclude 'Corp.ERP.Presentation.Web' ${{env.SOLUTION_FILE_PATH}}
       
     - name: dotnet test
       run: dotnet test ${{env.SOLUTION_FILE_PATH}}
