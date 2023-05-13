@@ -34,7 +34,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
-            .FirstAsync(w => w.Id == id);
+            .FirstAsync(f => f.Id.ToString().Equals(id.ToString()));
     }
 
     public async Task<Equipment> GetFirstOrDefaultAsync(Predicate<Equipment> predicate, Equipment defaultValue)

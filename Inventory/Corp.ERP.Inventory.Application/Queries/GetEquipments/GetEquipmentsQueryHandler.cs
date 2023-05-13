@@ -14,6 +14,7 @@ public class GetEquipmentsQueryHandler : IRequestHandler<GetEquipmentsQuery, Get
     public async Task<GetEquipmentsQueryResult> Handle(GetEquipmentsQuery request, CancellationToken cancellationToken)
     {
         var result = await _equipmentService.GetAllAsync();
+
         return new GetEquipmentsQueryResult
         {
             Equipments = result.Select(s => (EquipmentDto) s).ToList(),
