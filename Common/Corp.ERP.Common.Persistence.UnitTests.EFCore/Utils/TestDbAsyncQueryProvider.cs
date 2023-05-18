@@ -44,6 +44,11 @@ internal class TestDbAsyncQueryProvider<TEntity> : IAsyncQueryProvider
 
     TResult IAsyncQueryProvider.ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
     {
-        return _inner.Execute<TResult>(expression);
+        var expectedResultType = typeof(TResult).GetGenericArguments()[0];
+        var executionResult = ((IQueryProvider)this).Execute(expression);
+
+        return (TResult)typeof(Task).GetMethod(nameof(Task.FromResult))
+            .MakeGenericMethod(expectedResultType)
+            .Invoke(null, new[] { executionResult });
     }
 }
