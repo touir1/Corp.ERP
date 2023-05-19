@@ -38,21 +38,21 @@ internal class StorageRepositoryService : IStorageRepositoryService
             .FirstAsync(w => predicate(w)) ?? defaultValue;
     }
 
-    public async Task UpdateAsync(Storage entity)
+    public async Task<int> UpdateAsync(Storage entity)
     {
         _inventoryContext.Entry(entity).State = EntityState.Modified;
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task AddAsync(Storage entity)
+    public async Task<int> AddAsync(Storage entity)
     {
         await _inventoryContext.Storages.AddAsync(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Storage entity)
+    public async Task<int> DeleteAsync(Storage entity)
     {
         _inventoryContext.Storages.Remove(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 }

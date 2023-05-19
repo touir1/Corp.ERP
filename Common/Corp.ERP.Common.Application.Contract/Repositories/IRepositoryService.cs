@@ -8,7 +8,7 @@ public interface IRepositoryService<T> where T : IEntity
     Task<T> GetByIdAsync(Guid id);
     Task<IList<T>> GetAllAsync(Predicate<T> predicate);
     Task<T> GetFirstOrDefaultAsync(Predicate<T> predicate, T defaultValue);
-    Task UpdateAsync(T entity);
-    Task DeleteAsync(T entity);
-    Task AddAsync(T entity);
+    Task<int> UpdateAsync(T entity);
+    Task<int> DeleteAsync(T entity);
+    Task<int> AddAsync(T entity);
 }

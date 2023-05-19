@@ -17,6 +17,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -26,6 +27,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .Where(w => predicate(w))
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -34,7 +36,8 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
-            .FirstAsync(f => f.Id.ToString().Equals(id.ToString()));
+            .Where(f => f.Id.ToString().Equals(id.ToString()))
+            .FirstOrDefaultAsync();
     }
 
     public async Task<Equipment> GetFirstOrDefaultAsync(Predicate<Equipment> predicate, Equipment defaultValue)
@@ -42,24 +45,26 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
-            .FirstAsync(w => predicate(w)) ?? defaultValue;
+            .AsNoTracking()
+            .FirstOrDefaultAsync(w => predicate(w)) ?? defaultValue;
     }
 
-    public async Task UpdateAsync(Equipment entity)
+    public async Task<int> UpdateAsync(Equipment entity)
     {
         _inventoryContext.Entry(entity).State = EntityState.Modified;
-        await _inventoryContext.SaveChangesAsync();
+        //_inventoryContext.Equipments.UpdateAsync(entity);
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task AddAsync(Equipment entity)
+    public async Task<int> AddAsync(Equipment entity)
     {
         await _inventoryContext.Equipments.AddAsync(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Equipment entity)
+    public async Task<int> DeleteAsync(Equipment entity)
     {
         _inventoryContext.Equipments.Remove(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Microsoft.Data.Sqlite;
 using Corp.ERP.Inventory.Domain.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Corp.ERP.Inventory.Persistence;
 
@@ -17,19 +18,24 @@ public class InventoryContext : DbContext
     public InventoryContext(DbConfiguration configuration)
     {
         _configuration = configuration;
-        if (_configuration is not null && _configuration.EnsureCreated)
+        if (_configuration is not null && (_configuration.EnsureCreated | _configuration.EnsureDeleted))
         {
             // ensure folder created
             var builder = new SqliteConnectionStringBuilder(_configuration.ConnectionString);
             var dbPath = builder.DataSource;
-            var directoryPath = Path.GetDirectoryName(dbPath);
-            if (!Directory.Exists(directoryPath))
+            if(dbPath != null) 
             {
-                Directory.CreateDirectory(directoryPath);
+                var directoryPath = Path.GetDirectoryName(dbPath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
             }
 
-            // ensure sqlite database created
-            Database.EnsureCreated();
+            if (_configuration.EnsureDeleted)
+                Database.EnsureDeleted();
+            if(_configuration.EnsureCreated)
+                Database.EnsureCreated();
         }
     }
 
@@ -37,7 +43,8 @@ public class InventoryContext : DbContext
     {
         var connectionString = _configuration.ConnectionString;
 
-        optionsBuilder.UseSqlite(connectionString);
+        optionsBuilder.UseSqlite(connectionString)
+            .LogTo(Console.WriteLine, LogLevel.Information);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

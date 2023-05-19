@@ -19,8 +19,12 @@ internal class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
             .HasMaxLength(256);
         builder.Property(e => e.Description).HasColumnName("EQP_Description")
             .HasMaxLength(2000);
+        
         builder.Property(e => e.Code).HasColumnName("EQP_Code")
             .IsRequired().HasMaxLength(256);
+        builder.HasIndex(e => e.Code)
+            .IsUnique();
+
         builder.Property(e => e.IsInUse).HasColumnName("EQP_IsInUse");
         builder.Property(e => e.StartDateUsage).HasColumnName("EQP_StartDateUsage")
             .IsRequired(false);

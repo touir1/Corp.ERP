@@ -11,7 +11,31 @@ namespace Corp.ERP.Inventory.Application.UnitTests
         public async Task ShouldReturnTwoEquipmentsWhenGetEquipmentsAsync()
         {
             // Arrange
-            var count = 2;
+            var equipments = PrepareMockData();
+            var count = equipments.Count();
+
+            IEquipmentRepositoryService service = Substitute.For<IEquipmentRepositoryService>();
+
+            service.GetAllAsync().Returns(Task.FromResult(equipments));
+
+            GetEquipmentsQuery query = Substitute.For<GetEquipmentsQuery>();
+            GetEquipmentsQueryHandler handler = Substitute.For<GetEquipmentsQueryHandler>(service);
+
+            // Act
+            var result = handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            using (new AssertionScope())
+            {
+                result.IsCompletedSuccessfully.Should().BeTrue();
+                result.Result.Should().NotBeNull();
+                result.Result.Equipments.Should().HaveCount(count);
+            }
+            
+        }
+
+        public IList<Equipment> PrepareMockData()
+        {
             Storage storage = new Storage
             {
                 Id = Guid.NewGuid(),
@@ -50,24 +74,7 @@ namespace Corp.ERP.Inventory.Application.UnitTests
                 }
             };
 
-            IEquipmentRepositoryService service = Substitute.For<IEquipmentRepositoryService>();
-
-            service.GetAllAsync().Returns(Task.FromResult(equipments));
-
-            GetEquipmentsQuery query = Substitute.For<GetEquipmentsQuery>();
-            GetEquipmentsQueryHandler handler = Substitute.For<GetEquipmentsQueryHandler>(service);
-
-            // Act
-            var result = handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            using (new AssertionScope())
-            {
-                result.IsCompletedSuccessfully.Should().BeTrue();
-                result.Result.Should().NotBeNull();
-                result.Result.Equipments.Should().HaveCount(count);
-            }
-            
+            return equipments;
         }
     }
 }

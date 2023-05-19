@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Corp.ERP.Common.Core\Corp.ERP.Common.Core.csproj" />
     <ProjectReference Include="..\..\Common\Corp.ERP.Common.Persistence.UnitTests.EFCore\Corp.ERP.Common.Persistence.UnitTests.EFCore.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Domain\Corp.ERP.Inventory.Domain.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Persistence\Corp.ERP.Inventory.Persistence.csproj" />

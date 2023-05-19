@@ -38,21 +38,21 @@ public class UserRepositoryService : IUserRepositoryService
             .FirstAsync(w => predicate(w)) ?? defaultValue;
     }
 
-    public async Task UpdateAsync(User entity)
+    public async Task<int> UpdateAsync(User entity)
     {
         _inventoryContext.Entry(entity).State = EntityState.Modified;
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task AddAsync(User entity)
+    public async Task<int> AddAsync(User entity)
     {
         await _inventoryContext.Users.AddAsync(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(User entity)
+    public async Task<int> DeleteAsync(User entity)
     {
         _inventoryContext.Users.Remove(entity);
-        await _inventoryContext.SaveChangesAsync();
+        return await _inventoryContext.SaveChangesAsync();
     }
 }
