@@ -37,6 +37,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .Where(f => f.Id.ToString().Equals(id.ToString()))
+            .AsNoTracking()
             .FirstOrDefaultAsync();
     }
 
@@ -52,7 +53,7 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
     public async Task<int> UpdateAsync(Equipment entity)
     {
         _inventoryContext.Entry(entity).State = EntityState.Modified;
-        //_inventoryContext.Equipments.UpdateAsync(entity);
+
         return await _inventoryContext.SaveChangesAsync();
     }
 

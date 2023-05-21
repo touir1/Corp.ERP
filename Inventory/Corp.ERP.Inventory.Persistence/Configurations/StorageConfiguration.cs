@@ -10,9 +10,10 @@ namespace Corp.ERP.Inventory.Persistence.Configurations
         {
             builder.ToTable("INV_SRG_Storage");
 
-            builder.HasKey(e => e.Id);
             builder.Property(e => e.Id)
+                .HasColumnName("SRG_Id")
                 .ValueGeneratedOnAdd();
+            builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Name).HasColumnName("SRG_Name")
                 .IsRequired(true)

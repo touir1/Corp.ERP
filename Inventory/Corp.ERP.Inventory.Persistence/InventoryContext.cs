@@ -1,7 +1,6 @@
 ﻿using Corp.ERP.Inventory.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
-using Microsoft.Data.Sqlite;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.Extensions.Logging;
 
@@ -20,18 +19,6 @@ public class InventoryContext : DbContext
         _configuration = configuration;
         if (_configuration is not null && (_configuration.EnsureCreated | _configuration.EnsureDeleted))
         {
-            // ensure folder created
-            var builder = new SqliteConnectionStringBuilder(_configuration.ConnectionString);
-            var dbPath = builder.DataSource;
-            if(dbPath != null) 
-            {
-                var directoryPath = Path.GetDirectoryName(dbPath);
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
-            }
-
             if (_configuration.EnsureDeleted)
                 Database.EnsureDeleted();
             if(_configuration.EnsureCreated)
@@ -41,10 +28,23 @@ public class InventoryContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = _configuration.ConnectionString;
+        if (_configuration.UseInMemoryDatabase)
+        {
+            optionsBuilder
+                .UseInMemoryDatabase(databaseName: _configuration.InMemoryDatabaseName)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging();
+        }
+        else
+        {
+            var connectionString = _configuration.ConnectionString;
 
-        optionsBuilder.UseSqlite(connectionString)
-            .LogTo(Console.WriteLine, LogLevel.Information);
+            optionsBuilder
+                .UseSqlServer(connectionString)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                ;
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

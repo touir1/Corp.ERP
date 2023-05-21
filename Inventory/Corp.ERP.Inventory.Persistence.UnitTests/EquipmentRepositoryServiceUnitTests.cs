@@ -1,30 +1,21 @@
 using Corp.ERP.Common.Core;
 using Corp.ERP.Common.Persistence.UnitTests;
-using Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
 using Corp.ERP.Inventory.Domain.Models;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Corp.ERP.Inventory.Persistence;
 using Corp.ERP.Inventory.Persistence.Repositories;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.Query;
-using NSubstitute;
 
 namespace Corp.ERP.Inventory.Persistance.UnitTests;
 
 public class EquipmentRepositoryServiceUnitTests
 {
-    private static readonly string TEST_CONNECTION_STRING = "Data Source=../Databases/TestDB.db";
-
     [Fact]
     public async void ShouldReturnCorrectCountEquipmentsWhenGetAllAsync()
     {
         // Arrange
         IList<Equipment> equipments = PrepareMockData();
         var count = equipments.Count();
-        var equipmentRepo = PrepareMock(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
 
         // Act
         IList<Equipment> result = await equipmentRepo.GetAllAsync();
@@ -40,7 +31,7 @@ public class EquipmentRepositoryServiceUnitTests
         var count = 1;
         IList<Equipment> equipments = PrepareMockData();
         var testCode = equipments[0].Code;
-        var equipmentRepo = PrepareMock(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
 
         // Act
         IList<Equipment> result = await equipmentRepo.GetAllAsync(a => a.Code == testCode);
@@ -56,7 +47,7 @@ public class EquipmentRepositoryServiceUnitTests
         // Arrange
         var count = 0;
         IList<Equipment> equipments = PrepareMockData();
-        var equipmentRepo = PrepareMock(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
         var testCode = "";
         while (equipments.Where(w => w.Code == testCode).Count() > 0)
             testCode += StringUtils.GetRandomChar();
@@ -73,7 +64,7 @@ public class EquipmentRepositoryServiceUnitTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMock(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
         var testId = equipments[0].Id;
 
         // Act
@@ -92,7 +83,7 @@ public class EquipmentRepositoryServiceUnitTests
         var equipments = PrepareMockData();
         while (equipments.Where(w => w.Id.ToString().Equals(testId.ToString())).Count() > 0)
             testId = Guid.NewGuid();
-        var equipmentRepo = PrepareMock();
+        var equipmentRepo = PrepareMockRepo();
 
         // Act
         Equipment result = await equipmentRepo.GetByIdAsync(testId);
@@ -106,7 +97,7 @@ public class EquipmentRepositoryServiceUnitTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMock( equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
         var isInUse = equipments[0].IsInUse;
 
         // Act
@@ -122,7 +113,7 @@ public class EquipmentRepositoryServiceUnitTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMock(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments);
         var testCode = "";
         while (equipments.Where(w => w.Code == testCode).Count() > 0)
             testCode += StringUtils.GetRandomChar();
@@ -139,14 +130,9 @@ public class EquipmentRepositoryServiceUnitTests
     [Fact]
     public async void ShouldUpdateEquipmentWhenUpdateAsync()
     {
-        /*
-         * To change later as it uses a real sqlite database for now
-         * it throws errors related to Entry method calls if using NSubstitute
-         * and problem with table creation if using in-memory
-         */
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMock(equipments, true);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
         var id = equipments[0].Id.ToString();
         var newEquipment = new Equipment
         {
@@ -190,12 +176,12 @@ public class EquipmentRepositoryServiceUnitTests
         {
             var configuration = new DbConfiguration
             {
-                ConnectionString = TEST_CONNECTION_STRING,
                 EnsureCreated = true,
                 EnsureDeleted = true,
+                UseInMemoryDatabase = true,
+                InMemoryDatabaseName = "TestDatabase",
             };
             var inventoryContext = new InventoryContext(configuration);
-
 
             inventoryContext.AddRange(list);
             inventoryContext.SaveChanges();
@@ -249,14 +235,14 @@ public class EquipmentRepositoryServiceUnitTests
         return equipments;
     }
 
-    private EquipmentRepositoryService PrepareMock()
+    private EquipmentRepositoryService PrepareMockRepo()
     {
         IList<Equipment> equipments = PrepareMockData();
 
-        return PrepareMock(equipments);
+        return PrepareMockRepo(equipments);
     }
 
-    private EquipmentRepositoryService PrepareMock(IList<Equipment> equipments, bool createTestDatabase = false)
+    private EquipmentRepositoryService PrepareMockRepo(IList<Equipment> equipments, bool createTestDatabase = false)
     {
         var mockContext = PrepareContext(equipments, createTestDatabase);
 

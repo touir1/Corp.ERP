@@ -10,9 +10,10 @@ internal class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
     {
         builder.ToTable("INV_EQP_Equipment");
 
-        builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)
+            .HasColumnName("EQP_Id")
             .ValueGeneratedOnAdd();
+        builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Name).HasColumnName("EQP_Name")
             .IsRequired()
@@ -28,7 +29,7 @@ internal class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
         builder.Property(e => e.IsInUse).HasColumnName("EQP_IsInUse");
         builder.Property(e => e.StartDateUsage).HasColumnName("EQP_StartDateUsage")
             .IsRequired(false);
-        
+
         builder.Property(e => e.UsedById).HasColumnName("EQP_UsedById")
             .IsRequired(false);
         builder.HasOne(o => o.UsedBy).WithMany().HasForeignKey(k => k.UsedById)
@@ -38,6 +39,7 @@ internal class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
             .IsRequired(false);
         builder.HasOne(o => o.StorageUnit).WithMany().HasForeignKey(k => k.StorageUnitId)
             .IsRequired(false);
+
 
 
 
