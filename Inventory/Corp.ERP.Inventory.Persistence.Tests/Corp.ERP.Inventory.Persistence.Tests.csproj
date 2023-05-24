@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Corp.ERP.Common.Core\Corp.ERP.Common.Core.csproj" />
-    <ProjectReference Include="..\..\Common\Corp.ERP.Common.Persistence.UnitTests.EFCore\Corp.ERP.Common.Persistence.UnitTests.EFCore.csproj" />
+    <ProjectReference Include="..\..\Common\Corp.ERP.Common.Persistence.Tests.EFCore\Corp.ERP.Common.Persistence.Tests.EFCore.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Domain\Corp.ERP.Inventory.Domain.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Persistence\Corp.ERP.Inventory.Persistence.csproj" />
   </ItemGroup>

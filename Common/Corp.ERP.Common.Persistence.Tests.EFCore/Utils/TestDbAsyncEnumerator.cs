@@ -1,4 +1,4 @@
-﻿namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
+﻿namespace Corp.ERP.Common.Persistence.Tests.EFCore.Utils;
 
 internal class TestDbAsyncEnumerator<T> : IAsyncEnumerator<T>
 {

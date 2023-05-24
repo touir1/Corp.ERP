@@ -4,9 +4,9 @@ using Corp.ERP.Inventory.Service.RestAPI.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Corp.ERP.Inventory.Service.RestAPI.UnitTests;
+namespace Corp.ERP.Inventory.Service.RestAPI.Tests;
 
-public class EquipmentsControllerUnitTests
+public class EquipmentsControllerTests
 {
     [Fact]
     public async void ShouldReturnTwoEquipmentsWhenGetEquipments()

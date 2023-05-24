@@ -1,13 +1,13 @@
 using Corp.ERP.Common.Core;
-using Corp.ERP.Common.Persistence.UnitTests;
+using Corp.ERP.Common.Persistence.Tests;
 using Corp.ERP.Inventory.Domain.Models;
 using Corp.ERP.Inventory.Infrastructure.Configurations;
 using Corp.ERP.Inventory.Persistence;
 using Corp.ERP.Inventory.Persistence.Repositories;
 
-namespace Corp.ERP.Inventory.Persistance.UnitTests;
+namespace Corp.ERP.Inventory.Persistance.Tests;
 
-public class EquipmentRepositoryServiceUnitTests
+public class EquipmentRepositoryServiceTests
 {
     [Fact]
     public async void ShouldReturnCorrectCountEquipmentsWhenGetAllAsync()
