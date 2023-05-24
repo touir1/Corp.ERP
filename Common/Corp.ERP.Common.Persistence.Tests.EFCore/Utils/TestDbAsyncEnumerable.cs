@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
+namespace Corp.ERP.Common.Persistence.Tests.EFCore.Utils;
 
 internal class TestDbAsyncEnumerable<T> : EnumerableQuery<T>, IAsyncEnumerable<T>, IQueryable<T>
 {

@@ -1,6 +1,6 @@
-namespace Corp.ERP.Inventory.Domain.UnitTests;
+namespace Corp.ERP.Inventory.Domain.Tests;
 
-public class UserUnitTests
+public class UserTests
 {
     [Fact]
     public void ShouldReturnFullNameWhenFirstNameAndLastNameSet()

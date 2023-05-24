@@ -3,9 +3,9 @@ using Corp.ERP.Inventory.Application.Queries.GetEquipments;
 using Corp.ERP.Inventory.Domain.Models;
 using FluentAssertions.Execution;
 
-namespace Corp.ERP.Inventory.Application.UnitTests
+namespace Corp.ERP.Inventory.Application.Tests
 {
-    public class InventoryQueriesUnitTests
+    public class InventoryQueriesTests
     {
         [Fact]
         public async Task ShouldReturnTwoEquipmentsWhenGetEquipmentsAsync()

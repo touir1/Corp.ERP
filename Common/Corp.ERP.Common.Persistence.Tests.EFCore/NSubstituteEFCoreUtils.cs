@@ -1,7 +1,7 @@
-﻿using Corp.ERP.Common.Persistence.UnitTests.EFCore.Utils;
+﻿using Corp.ERP.Common.Persistence.Tests.EFCore.Utils;
 using Microsoft.EntityFrameworkCore;
 
-namespace Corp.ERP.Common.Persistence.UnitTests;
+namespace Corp.ERP.Common.Persistence.Tests;
 
 public class NSubstituteEFCoreUtils
 {
