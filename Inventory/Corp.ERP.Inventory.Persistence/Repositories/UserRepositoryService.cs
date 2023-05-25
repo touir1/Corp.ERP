@@ -1,6 +1,7 @@
 ﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
@@ -19,10 +20,10 @@ public class UserRepositoryService : IUserRepositoryService
             .ToListAsync();
     }
 
-    public async Task<IList<User>> GetAllAsync(Predicate<User> predicate)
+    public async Task<IList<User>> GetAllAsync(Expression<Func<User, bool>> predicate)
     {
         return await _inventoryContext.Users
-            .Where(w => predicate(w))
+            .Where(predicate)
             .ToListAsync();
     }
 
@@ -32,10 +33,10 @@ public class UserRepositoryService : IUserRepositoryService
             .FirstAsync(w => w.Id == id);
     }
 
-    public async Task<User> GetFirstOrDefaultAsync(Predicate<User> predicate, User defaultValue)
+    public async Task<User> GetFirstOrDefaultAsync(Expression<Func<User, bool>> predicate, User defaultValue)
     {
         return await _inventoryContext.Users
-            .FirstAsync(w => predicate(w)) ?? defaultValue;
+            .FirstAsync(predicate) ?? defaultValue;
     }
 
     public async Task<int> UpdateAsync(User entity)

@@ -1,6 +1,8 @@
-﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
+﻿using Corp.ERP.Common.Core;
+using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
@@ -21,12 +23,12 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
             .ToListAsync();
     }
 
-    public async Task<IList<Equipment>> GetAllAsync(Predicate<Equipment> predicate)
+    public async Task<IList<Equipment>> GetAllAsync(Expression<Func<Equipment,bool>> predicate)
     {
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
-            .Where(w => predicate(w))
+            .Where(predicate)
             .AsNoTracking()
             .ToListAsync();
     }
@@ -41,13 +43,13 @@ public class EquipmentRepositoryService : IEquipmentRepositoryService
             .FirstOrDefaultAsync();
     }
 
-    public async Task<Equipment> GetFirstOrDefaultAsync(Predicate<Equipment> predicate, Equipment defaultValue)
+    public async Task<Equipment> GetFirstOrDefaultAsync(Expression<Func<Equipment,bool>> predicate, Equipment defaultValue)
     {
         return await _inventoryContext.Equipments
             .Include(inc => inc.StorageUnit)
             .Include(inc => inc.UsedBy)
             .AsNoTracking()
-            .FirstOrDefaultAsync(w => predicate(w)) ?? defaultValue;
+            .FirstOrDefaultAsync(predicate) ?? defaultValue;
     }
 
     public async Task<int> UpdateAsync(Equipment entity)
