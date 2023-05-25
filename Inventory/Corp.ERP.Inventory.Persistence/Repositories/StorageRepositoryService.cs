@@ -1,6 +1,7 @@
 ﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
@@ -19,10 +20,10 @@ internal class StorageRepositoryService : IStorageRepositoryService
             .ToListAsync();
     }
 
-    public async Task<IList<Storage>> GetAllAsync(Predicate<Storage> predicate)
+    public async Task<IList<Storage>> GetAllAsync(Expression<Func<Storage, bool>> predicate)
     {
         return await _inventoryContext.Storages
-            .Where(w => predicate(w))
+            .Where(predicate)
             .ToListAsync();
     }
 
@@ -32,10 +33,10 @@ internal class StorageRepositoryService : IStorageRepositoryService
             .FirstAsync(w => w.Id == id);
     }
 
-    public async Task<Storage> GetFirstOrDefaultAsync(Predicate<Storage> predicate, Storage defaultValue)
+    public async Task<Storage> GetFirstOrDefaultAsync(Expression<Func<Storage, bool>> predicate, Storage defaultValue)
     {
         return await _inventoryContext.Storages
-            .FirstAsync(w => predicate(w)) ?? defaultValue;
+            .FirstAsync(predicate) ?? defaultValue;
     }
 
     public async Task<int> UpdateAsync(Storage entity)

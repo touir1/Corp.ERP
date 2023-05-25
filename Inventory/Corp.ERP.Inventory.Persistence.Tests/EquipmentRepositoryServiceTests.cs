@@ -15,7 +15,7 @@ public class EquipmentRepositoryServiceTests
         // Arrange
         IList<Equipment> equipments = PrepareMockData();
         var count = equipments.Count();
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
 
         // Act
         IList<Equipment> result = await equipmentRepo.GetAllAsync();
@@ -31,7 +31,7 @@ public class EquipmentRepositoryServiceTests
         var count = 1;
         IList<Equipment> equipments = PrepareMockData();
         var testCode = equipments[0].Code;
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
 
         // Act
         IList<Equipment> result = await equipmentRepo.GetAllAsync(a => a.Code == testCode);
@@ -47,7 +47,7 @@ public class EquipmentRepositoryServiceTests
         // Arrange
         var count = 0;
         IList<Equipment> equipments = PrepareMockData();
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
         var testCode = "";
         while (equipments.Where(w => w.Code == testCode).Count() > 0)
             testCode += StringUtils.GetRandomChar();
@@ -64,7 +64,7 @@ public class EquipmentRepositoryServiceTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
         var testId = equipments[0].Id;
 
         // Act
@@ -83,7 +83,7 @@ public class EquipmentRepositoryServiceTests
         var equipments = PrepareMockData();
         while (equipments.Where(w => w.Id.ToString().Equals(testId.ToString())).Count() > 0)
             testId = Guid.NewGuid();
-        var equipmentRepo = PrepareMockRepo();
+        var equipmentRepo = PrepareMockRepo(equipments, true);
 
         // Act
         Equipment result = await equipmentRepo.GetByIdAsync(testId);
@@ -97,7 +97,7 @@ public class EquipmentRepositoryServiceTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
         var isInUse = equipments[0].IsInUse;
 
         // Act
@@ -113,14 +113,14 @@ public class EquipmentRepositoryServiceTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        var equipmentRepo = PrepareMockRepo(equipments);
+        var equipmentRepo = PrepareMockRepo(equipments, true);
         var testCode = "";
         while (equipments.Where(w => w.Code == testCode).Count() > 0)
             testCode += StringUtils.GetRandomChar();
         var defaultResult = new Equipment();
 
         // Act
-        Equipment result = await equipmentRepo.GetFirstOrDefaultAsync(a => a.Code == testCode, defaultResult);
+        Equipment result = await equipmentRepo.GetFirstOrDefaultAsync(a => a.Code.Equals(testCode), defaultResult);
 
         // Assert
         result.Should().NotBeNull();
@@ -150,7 +150,8 @@ public class EquipmentRepositoryServiceTests
 
         // Act
         int nbResult = await equipmentRepo.UpdateAsync(newEquipment);
-        var result = (await equipmentRepo.GetAllAsync()).Where(w => w.Id.ToString() == id).FirstOrDefault();
+        var result = await equipmentRepo.GetByIdAsync(Guid.Parse(id));
+        //(await equipmentRepo.GetAllAsync()).Where(w => w.Id.ToString() == id).FirstOrDefault();
 
         // Assert
         nbResult.Should().Be(1);
