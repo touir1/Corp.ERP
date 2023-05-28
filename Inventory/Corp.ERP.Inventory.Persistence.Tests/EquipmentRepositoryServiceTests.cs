@@ -137,20 +137,15 @@ public class EquipmentRepositoryServiceTests
             Description = equipments[0].Description,
             IsInUse = equipments[0].IsInUse,
             StartDateUsage = equipments[0].StartDateUsage,
-            //StorageUnit = equipments[0].StorageUnit,
             StorageUnitId = equipments[0].StorageUnitId,
-            //UsedBy = equipments[0].UsedBy,
             UsedById = equipments[0].UsedById,
         };
 
         // Act
         int nbResult = await equipmentRepo.UpdateAsync(newEquipment);
-        //var result = await equipmentRepo.GetByIdAsync(Guid.Parse(id));
 
         // Assert
         nbResult.Should().Be(1);
-        //result.Should().NotBeNull();
-        //result.Name.Should().Be(newEquipment.Name);
         
     }
 
@@ -159,7 +154,6 @@ public class EquipmentRepositoryServiceTests
     {
         // Arrange
         var equipments = PrepareMockData();
-        //int countBefore = equipments.Count();
         var equipmentRepo = PrepareMockRepo(equipments, true);
         var newEquipment = new Equipment
         {
@@ -168,20 +162,14 @@ public class EquipmentRepositoryServiceTests
             Code = "Test_code",
             Description = "this is a test equipment",
             IsInUse = false,
-            //StartDateUsage = null,
-            //StorageUnit = equipments[0].StorageUnit,
             StorageUnitId = equipments[0].StorageUnitId,
-            //UsedBy = equipments[0].UsedBy,
-            //UsedById = equipments[0].UsedById,
         };
 
         // Act
         int nbResult = await equipmentRepo.AddAsync(newEquipment);
-        //var result = await equipmentRepo.GetAllAsync();
 
         // Assert
         nbResult.Should().Be(1);
-        //result.Should().NotBeNull().And.HaveCount(countBefore + 1);
         newEquipment.Id.Should().NotBe(Guid.Empty);
     }
 
@@ -200,7 +188,7 @@ public class EquipmentRepositoryServiceTests
             IsInUse = false,
             StorageUnitId = equipments[0].StorageUnitId,
         };
-        Exception exception = null;
+        Exception? exception = null;
 
         // Act
         int nbResult = 0;
