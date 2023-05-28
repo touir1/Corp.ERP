@@ -1,9 +1,4 @@
 using Corp.ERP.Common.Core;
-using Corp.ERP.Common.Persistence.Tests;
-using Corp.ERP.Inventory.Domain.Models;
-using Corp.ERP.Inventory.Infrastructure.Configurations;
-using Corp.ERP.Inventory.Persistence;
-using Corp.ERP.Inventory.Persistence.Repositories;
 
 namespace Corp.ERP.Inventory.Persistance.Tests;
 
@@ -266,7 +261,7 @@ public class EquipmentRepositoryServiceTests
             };
             var inventoryContext = new InventoryContext(configuration);
 
-            inventoryContext.AddRange(list);
+            inventoryContext.Equipments.AddRange(list);
             inventoryContext.SaveChanges();
             inventoryContext.ChangeTracker.Clear();
 

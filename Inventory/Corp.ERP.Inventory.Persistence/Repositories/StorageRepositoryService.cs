@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
-internal class StorageRepositoryService : IStorageRepositoryService
+public class StorageRepositoryService : IStorageRepositoryService
 {
     private readonly InventoryContext _inventoryContext;
 
