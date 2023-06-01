@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Corp.ERP.Inventory.Persistence.Repositories;
 
-internal class StorageRepositoryService : IStorageRepositoryService
+public class StorageRepositoryService : IStorageRepositoryService
 {
     private readonly InventoryContext _inventoryContext;
 
@@ -17,12 +17,14 @@ internal class StorageRepositoryService : IStorageRepositoryService
     public async Task<IList<Storage>> GetAllAsync()
     {
         return await _inventoryContext.Storages
+            .AsNoTracking()
             .ToListAsync();
     }
 
     public async Task<IList<Storage>> GetAllAsync(Expression<Func<Storage, bool>> predicate)
     {
         return await _inventoryContext.Storages
+            .AsNoTracking()
             .Where(predicate)
             .ToListAsync();
     }
@@ -30,13 +32,16 @@ internal class StorageRepositoryService : IStorageRepositoryService
     public async Task<Storage> GetByIdAsync(Guid id)
     {
         return await _inventoryContext.Storages
-            .FirstAsync(w => w.Id == id);
+            .Where(f => f.Id.ToString().Equals(id.ToString()))
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
     }
 
     public async Task<Storage> GetFirstOrDefaultAsync(Expression<Func<Storage, bool>> predicate, Storage defaultValue)
     {
         return await _inventoryContext.Storages
-            .FirstAsync(predicate) ?? defaultValue;
+            .AsNoTracking()
+            .FirstOrDefaultAsync(predicate) ?? defaultValue;
     }
 
     public async Task<int> UpdateAsync(Storage entity)
