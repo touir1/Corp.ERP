@@ -231,7 +231,7 @@ public class StorageRepositoryServiceTests
                 EnsureCreated = true,
                 EnsureDeleted = true,
                 UseInMemoryDatabase = true,
-                InMemoryDatabaseName = "TestDatabase",
+                InMemoryDatabaseName = StringUtils.GetRandomString(20),
             };
             var inventoryContext = new InventoryContext(configuration);
 
