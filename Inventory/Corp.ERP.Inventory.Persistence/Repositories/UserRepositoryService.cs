@@ -17,6 +17,7 @@ public class UserRepositoryService : IUserRepositoryService
     public async Task<IList<User>> GetAllAsync()
     {
         return await _inventoryContext.Users
+            .AsNoTracking()
             .ToListAsync();
     }
 
@@ -24,19 +25,23 @@ public class UserRepositoryService : IUserRepositoryService
     {
         return await _inventoryContext.Users
             .Where(predicate)
+            .AsNoTracking()
             .ToListAsync();
     }
 
     public async Task<User> GetByIdAsync(Guid id)
     {
         return await _inventoryContext.Users
-            .FirstAsync(w => w.Id == id);
+            .AsNoTracking()
+            .Where(f => f.Id.ToString().Equals(id.ToString()))
+            .FirstOrDefaultAsync();
     }
 
     public async Task<User> GetFirstOrDefaultAsync(Expression<Func<User, bool>> predicate, User defaultValue)
     {
         return await _inventoryContext.Users
-            .FirstAsync(predicate) ?? defaultValue;
+            .AsNoTracking()
+            .FirstOrDefaultAsync(predicate) ?? defaultValue;
     }
 
     public async Task<int> UpdateAsync(User entity)

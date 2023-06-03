@@ -1,6 +1,4 @@
-using Corp.ERP.Common.Core;
-
-namespace Corp.ERP.Inventory.Persistance.Tests;
+namespace Corp.ERP.Inventory.Persistence.Tests;
 
 public class EquipmentRepositoryServiceTests
 {

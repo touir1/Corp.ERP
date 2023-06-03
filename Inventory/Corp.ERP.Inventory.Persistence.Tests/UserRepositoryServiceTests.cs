@@ -1,58 +1,58 @@
 ﻿namespace Corp.ERP.Inventory.Persistence.Tests;
 
-public class StorageRepositoryServiceTests
+public class UserRepositoryServiceTests
 {
     [Fact]
-    public async void ShouldReturnCorrectCountStoragesWhenGetAllAsync()
+    public async void ShouldReturnCorrectCountUsersWhenGetAllAsync()
     {
         // Arrange
-        IList<Storage> list = PrepareMockData();
+        IList<User> list = PrepareMockData();
         var count = list.Count();
         var repo = PrepareMockRepo(list, true);
 
         // Act
-        IList<Storage> result = await repo.GetAllAsync();
+        IList<User> result = await repo.GetAllAsync();
 
         // Assert
         result.Should().HaveCount(count);
     }
 
     [Fact]
-    public async void ShouldReturnOneStorageWhenGetAllAsyncWithPredicateFixedId()
+    public async void ShouldReturnOneUserWhenGetAllAsyncWithPredicateFixedId()
     {
         // Arrange
-        IList<Storage> list = PrepareMockData();
+        IList<User> list = PrepareMockData();
         var count = 1;
         var id = list[0].Id;
         var repo = PrepareMockRepo(list, true);
 
         // Act
-        IList<Storage> result = await repo.GetAllAsync(s => s.Id.ToString().Equals(id.ToString()));
+        IList<User> result = await repo.GetAllAsync(s => s.Id.ToString().Equals(id.ToString()));
 
         // Assert
         result.Should().HaveCount(count);
     }
 
     [Fact]
-    public async void ShouldReturnEmptyStorageListWhenGetAllAsyncWithPredicateGotNoResult()
+    public async void ShouldReturnEmptyUserListWhenGetAllAsyncWithPredicateGotNoResult()
     {
         // Arrange
         var count = 0;
-        IList<Storage> list = PrepareMockData();
+        IList<User> list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
         var id = Guid.NewGuid().ToString();
         while (list.Where(w => w.Id.ToString().Equals(id)).Count() > 0)
             id = Guid.NewGuid().ToString();
 
         // Act
-        IList<Storage> result = await repo.GetAllAsync(a => a.Id.ToString().Equals(id));
+        IList<User> result = await repo.GetAllAsync(a => a.Id.ToString().Equals(id));
 
         // Assert
         result.Should().NotBeNull().And.HaveCount(count);
     }
 
     [Fact]
-    public async void ShouldReturnStorageWhenGetByIdAsync()
+    public async void ShouldReturnUserWhenGetByIdAsync()
     {
         // Arrange
         var list = PrepareMockData();
@@ -60,7 +60,7 @@ public class StorageRepositoryServiceTests
         var id = list[0].Id;
 
         // Act
-        Storage result = await repo.GetByIdAsync(id);
+        User result = await repo.GetByIdAsync(id);
 
         // Assert
         result.Should().NotBeNull();
@@ -78,26 +78,26 @@ public class StorageRepositoryServiceTests
         var repo = PrepareMockRepo(list, true);
 
         // Act
-        Storage result = await repo.GetByIdAsync(id);
+        User result = await repo.GetByIdAsync(id);
 
         // Assert
         result.Should().BeNull();
     }
 
     [Fact]
-    public async void ShouldReturnStorageWhenGetFirstOrDefault()
+    public async void ShouldReturnUserWhenGetFirstOrDefault()
     {
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
-        var name = list[0].Name;
+        var firstname = list[0].FirstName;
 
         // Act
-        Storage result = await repo.GetFirstOrDefaultAsync(e => e.Name == name, null);
+        User result = await repo.GetFirstOrDefaultAsync(e => e.FirstName == firstname, null);
 
         // Assert
         result.Should().NotBeNull();
-        result.Name.Should().Be(name);
+        result.FirstName.Should().Be(firstname);
     }
 
     [Fact]
@@ -106,13 +106,14 @@ public class StorageRepositoryServiceTests
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
-        var name = "";
-        while (list.Where(w => w.Name == name).Count() > 0)
-            name += StringUtils.GetRandomChar();
-        var defaultResult = new Storage();
+        var firstname = "";
+        while (list.Where(w => w.FirstName == firstname).Count() > 0)
+            firstname += StringUtils.GetRandomChar();
+        var defaultResult = new User();
 
         // Act
-        Storage result = await repo.GetFirstOrDefaultAsync(a => a.Name.Equals(name), defaultResult);
+        User result = await repo
+            .GetFirstOrDefaultAsync(a => a.FirstName.Equals(firstname), defaultResult);
 
         // Assert
         result.Should().NotBeNull();
@@ -120,16 +121,16 @@ public class StorageRepositoryServiceTests
     }
 
     [Fact]
-    public async void ShouldUpdateStorageWhenUpdateAsync()
+    public async void ShouldUpdateUserWhenUpdateAsync()
     {
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
         var id = list[0].Id.ToString();
-        var newEntity = new Storage
+        var newEntity = new User
         {
             Id = Guid.Parse(id),
-            Name = "changed name"
+            FirstName = "changed firstname"
         };
 
         // Act
@@ -141,15 +142,16 @@ public class StorageRepositoryServiceTests
     }
 
     [Fact]
-    public async void ShouldAddStorageWhenAddAsync()
+    public async void ShouldAddUserWhenAddAsync()
     {
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
-        var newEntity = new Storage
+        var newEntity = new User
         {
-            Name = "Test equipment",
-            Address = "Test address"
+            FirstName = "new firstname",
+            LastName = "new lastname",
+            Email = "new.mail@email.com"
         };
 
         // Act
@@ -161,16 +163,17 @@ public class StorageRepositoryServiceTests
     }
 
     [Fact]
-    public async void ShouldNotAddStorageWhenAddAsyncIdExists()
+    public async void ShouldNotAddUserWhenAddAsyncIdExists()
     {
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
-        var newEntity = new Storage
+        var newEntity = new User
         {
             Id = list[0].Id,
-            Name = "Test equipment",
-            Address = "Test address"
+            FirstName = "new firstname",
+            LastName = "new lastname",
+            Email = "new.user@email.com"
         };
         Exception? exception = null;
 
@@ -191,12 +194,12 @@ public class StorageRepositoryServiceTests
     }
 
     [Fact]
-    public async void ShouldRemoveStorageWhenDeleteAsync()
+    public async void ShouldRemoveUserWhenDeleteAsync()
     {
         // Arrange
         var list = PrepareMockData();
         var repo = PrepareMockRepo(list, true);
-        var toDeleteEntity = new Storage
+        var toDeleteEntity = new User
         {
             Id = list[0].Id,
         };
@@ -209,7 +212,7 @@ public class StorageRepositoryServiceTests
     }
 
     #region Utils
-    private InventoryContext PrepareContext(IList<Storage> list, bool createTestDatabase)
+    private InventoryContext PrepareContext(IList<User> list, bool createTestDatabase)
     {
         if (!createTestDatabase)
         {
@@ -217,8 +220,8 @@ public class StorageRepositoryServiceTests
             var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
 
             var mockSet = NSubstituteEFCoreUtils.GetDbSetSubstitute(list);
-            mockContext.Set<Storage>().Returns(mockSet);
-            mockContext.Storages = mockSet;
+            mockContext.Set<User>().Returns(mockSet);
+            mockContext.Users = mockSet;
 
             return mockContext;
         }
@@ -233,7 +236,7 @@ public class StorageRepositoryServiceTests
             };
             var inventoryContext = new InventoryContext(configuration);
 
-            inventoryContext.Storages.AddRange(list);
+            inventoryContext.Users.AddRange(list);
             inventoryContext.SaveChanges();
             inventoryContext.ChangeTracker.Clear();
 
@@ -241,32 +244,34 @@ public class StorageRepositoryServiceTests
         }
     }
 
-    private IList<Storage> PrepareMockData()
+    private IList<User> PrepareMockData()
     {
-        IList<Storage> list = new List<Storage>
+        IList<User> list = new List<User>
         {
-            new Storage {
+            new User {
                 Id = Guid.NewGuid(),
-                Name = "Storage 1",
-                Address = "My company address"
+                Email = "test1.mail@email.com",
+                FirstName = "Test_f_1",
+                LastName = "Test_l_1",
             },
-            new Storage
+            new User
             {
                 Id = Guid.NewGuid(),
-                Name = "Storage 2",
-                Address = "address 2"
+                Email = "test2.mail@email.com",
+                FirstName = "Test_f_2",
+                LastName = "Test_l_2",
             }
         };
-        
+
 
         return list;
     }
 
-    private StorageRepositoryService PrepareMockRepo(IList<Storage> equipments, bool createTestDatabase = false)
+    private UserRepositoryService PrepareMockRepo(IList<User> list, bool createTestDatabase = false)
     {
-        var mockContext = PrepareContext(equipments, createTestDatabase);
+        var mockContext = PrepareContext(list, createTestDatabase);
 
-        var repo = new StorageRepositoryService(mockContext);
+        var repo = new UserRepositoryService(mockContext);
 
         return repo;
     }
