@@ -1,9 +1,7 @@
-using Corp.ERP.Inventory.Application.Contract.Repositories;
-using Corp.ERP.Inventory.Infrastructure.Configurations;
-using Corp.ERP.Inventory.Persistence;
-using Corp.ERP.Inventory.Persistence.Repositories;
+using Corp.ERP.HR.Infrastructure.Configurations;
+using Corp.ERP.HR.Persistence;
 
-namespace Corp.ERP.Inventory.Service.RestAPI;
+namespace Corp.ERP.HR.Service.RestAPI;
 
 public class Program
 {
@@ -45,10 +43,10 @@ public class Program
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
             typeof(Application.Application).Assembly)
         );
-        services.AddScoped<IEquipmentRepositoryService, EquipmentRepositoryService>();
-        services.AddDbContext<InventoryContext>();
+        //services.AddScoped<IEquipmentRepositoryService, EquipmentRepositoryService>();
+        services.AddDbContext<HRContext>();
 
-        services.AddSingleton<InventoryDbConfiguration>(conf.GetSection("DbConfiguration").Get<InventoryDbConfiguration>());
-            
+        services.AddSingleton<HRDbConfiguration>(conf.GetSection("DbConfiguration").Get<HRDbConfiguration>());
+
     }
 }

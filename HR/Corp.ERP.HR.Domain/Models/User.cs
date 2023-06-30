@@ -13,11 +13,13 @@ public class User : IEntity
     public virtual DateTime BirthdayDate { get; set; }
     public virtual DateTime RecruitmentDate { get; set; }
     public virtual DateTime? LeavingDate { get; set; }
-    public virtual User? ManagedBy { get; set; }
-    public virtual Title CurrentTitle { get; set; }
     public virtual double CurrentSalaryGross { get; set; }
     public virtual double CurrentSalaryNet { get; set; }
-    public virtual List<Identification> Identifications { get; set; }
     public virtual Boolean IsDeleted { get; set; }
-    
+    public virtual List<Identification> Identifications { get; set; }
+    public virtual Guid? ManagedById { get; set; }
+    public virtual User? ManagedBy { get; set; }
+    public virtual Guid CurrentTitleId { get; set; }
+    public virtual Title CurrentTitle { get; set; }
+
 }

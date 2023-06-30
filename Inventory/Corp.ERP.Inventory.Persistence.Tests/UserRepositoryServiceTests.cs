@@ -216,7 +216,7 @@ public class UserRepositoryServiceTests
     {
         if (!createTestDatabase)
         {
-            var mockConfiguration = Substitute.For<DbConfiguration>();
+            var mockConfiguration = Substitute.For<InventoryDbConfiguration>();
             var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
 
             var mockSet = NSubstituteEFCoreUtils.GetDbSetSubstitute(list);
@@ -227,7 +227,7 @@ public class UserRepositoryServiceTests
         }
         else
         {
-            var configuration = new DbConfiguration
+            var configuration = new InventoryDbConfiguration
             {
                 EnsureCreated = true,
                 EnsureDeleted = true,

@@ -1,27 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Corp.ERP.Inventory.Infrastructure.Configurations;
-using Corp.ERP.Inventory.Domain.Models;
+﻿using Corp.ERP.HR.Domain.Models;
+using Corp.ERP.HR.Infrastructure.Configurations;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 
-namespace Corp.ERP.Inventory.Persistence;
+namespace Corp.ERP.HR.Persistence;
 
-public class InventoryContext : DbContext
+public class HRContext : DbContext
 {
-    private readonly InventoryDbConfiguration _configuration;
+    private readonly HRDbConfiguration _configuration;
 
-    public DbSet<Equipment> Equipments { get; set; }
-    public DbSet<Storage> Storages { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Title> Titles { get; set; }
+    public DbSet<Identification> Identifications { get; set; }
+    public DbSet<IdentificationType> IdentificationTypes { get; set; }
 
-    public InventoryContext(InventoryDbConfiguration configuration)
+    public HRContext(HRDbConfiguration configuration)
     {
         _configuration = configuration;
         if (_configuration is not null && (_configuration.EnsureCreated | _configuration.EnsureDeleted))
         {
             if (_configuration.EnsureDeleted)
                 Database.EnsureDeleted();
-            if(_configuration.EnsureCreated)
+            if (_configuration.EnsureCreated)
                 Database.EnsureCreated();
         }
     }

@@ -213,7 +213,7 @@ public class StorageRepositoryServiceTests
     {
         if (!createTestDatabase)
         {
-            var mockConfiguration = Substitute.For<DbConfiguration>();
+            var mockConfiguration = Substitute.For<InventoryDbConfiguration>();
             var mockContext = Substitute.For<InventoryContext>(mockConfiguration);
 
             var mockSet = NSubstituteEFCoreUtils.GetDbSetSubstitute(list);
@@ -224,7 +224,7 @@ public class StorageRepositoryServiceTests
         }
         else
         {
-            var configuration = new DbConfiguration
+            var configuration = new InventoryDbConfiguration
             {
                 EnsureCreated = true,
                 EnsureDeleted = true,

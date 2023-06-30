@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Corp.ERP.Common.Core\Corp.ERP.Common.Core.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Application.Contract\Corp.ERP.Inventory.Application.Contract.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Domain\Corp.ERP.Inventory.Domain.csproj" />
     <ProjectReference Include="..\Corp.ERP.Inventory.Infrastructure\Corp.ERP.Inventory.Infrastructure.csproj" />

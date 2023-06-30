@@ -1,6 +1,6 @@
 ﻿namespace Corp.ERP.Inventory.Infrastructure.Configurations;
 
-public class DbConfiguration
+public class InventoryDbConfiguration
 {
     public Boolean EnsureCreated { get; set; }
     public Boolean EnsureDeleted { get; set; }
