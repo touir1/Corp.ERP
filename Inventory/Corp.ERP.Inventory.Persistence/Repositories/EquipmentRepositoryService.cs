@@ -1,5 +1,4 @@
-﻿using Corp.ERP.Common.Core;
-using Corp.ERP.Inventory.Application.Contract.Repositories;
+﻿using Corp.ERP.Inventory.Application.Contract.Repositories;
 using Corp.ERP.Inventory.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
